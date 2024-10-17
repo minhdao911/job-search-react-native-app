@@ -21,46 +21,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.tertiary,
   },
   noOfSearchedJobs: {
-    marginTop: 2,
     fontFamily: FONT.medium,
     fontSize: SIZES.small,
     color: COLORS.primary,
+    marginTop: 2,
+    marginBottom: SIZES.medium,
   },
   loaderContainer: {
     marginTop: SIZES.medium,
-  },
-  footerContainer: {
-    marginTop: SIZES.small,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    gap: 10,
-  },
-  paginationButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: COLORS.tertiary,
-  },
-  paginationImage: {
-    width: "60%",
-    height: "60%",
-    tintColor: COLORS.white,
-  },
-  paginationTextBox: {
-    width: 30,
-    height: 30,
-    borderRadius: 2,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: COLORS.white,
-  },
-  paginationText: {
-    fontFamily: FONT.bold,
-    fontSize: SIZES.medium,
-    color: COLORS.primary,
   },
 });
 

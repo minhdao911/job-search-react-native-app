@@ -8,9 +8,10 @@ import {
   FlatList,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { COLORS, icons, SIZES } from "@/constants";
+import { COLORS, SIZES } from "@/constants";
 import { EmploymentType } from "@/types/jsearch";
 import { getEmploymentType } from "@/utils";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "./welcome.style";
 
@@ -23,6 +24,7 @@ const Welcome = () => {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState<EmploymentType | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>();
 
   return (
     <View>
@@ -34,48 +36,18 @@ const Welcome = () => {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
+            value={searchTerm}
             placeholder="What are you looking for?"
             placeholderTextColor={COLORS.gray}
+            onChangeText={setSearchTerm}
           />
         </View>
-        <TouchableOpacity style={styles.searchBtn}>
-          <Image style={styles.searchBtnImage} source={icons.search} />
+        <TouchableOpacity
+          style={styles.searchBtn}
+          onPress={() => router.push(`/search/${searchTerm}`)}
+        >
+          <Ionicons name="search" size={30} color={COLORS.white} />
         </TouchableOpacity>
-      </View>
-      <View style={styles.tabsContainer}>
-        <FlatList
-          data={tabs}
-          keyExtractor={(item) => item.value}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={[
-                styles.tab,
-                {
-                  borderColor:
-                    activeTab === item.value ? COLORS.secondary : COLORS.gray2,
-                },
-              ]}
-              onPress={() => {
-                setActiveTab(item.value);
-                router.push(`/search/${item.value}`);
-              }}
-            >
-              <Text
-                style={[
-                  styles.tabText,
-                  {
-                    color:
-                      activeTab === item.value ? COLORS.secondary : COLORS.gray,
-                  },
-                ]}
-              >
-                {item.name}
-              </Text>
-            </TouchableOpacity>
-          )}
-          contentContainerStyle={{ columnGap: SIZES.small }}
-          horizontal
-        />
       </View>
     </View>
   );

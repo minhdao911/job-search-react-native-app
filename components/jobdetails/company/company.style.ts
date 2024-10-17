@@ -34,11 +34,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  locationImage: {
-    width: 14,
-    height: 14,
-    tintColor: COLORS.gray,
-  },
   locationName: {
     fontSize: SIZES.medium,
     color: COLORS.primary,

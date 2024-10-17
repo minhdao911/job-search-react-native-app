@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     padding: SIZES.large,
     color: COLORS.secondary,
   },
+  screenContainer: { flex: 1, padding: SIZES.large },
 });
 
 export default styles;

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   actionText: {
-    fontSize: SIZES.medium,
+    fontSize: SIZES.small,
     fontFamily: FONT.medium,
     color: COLORS.gray,
   },

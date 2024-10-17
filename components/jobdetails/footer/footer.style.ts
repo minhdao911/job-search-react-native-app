@@ -23,11 +23,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  likeBtnImage: {
-    width: "40%",
-    height: "40%",
-    tintColor: "#F37453",
-  },
   applyBtn: {
     flex: 1,
     backgroundColor: "#FE7654",
@@ -39,7 +34,7 @@ const styles = StyleSheet.create({
   },
   applyBtnText: {
     fontSize: SIZES.medium,
-    color: COLORS.white,
+    color: "#FFF",
     fontFamily: FONT.bold,
   },
 });

@@ -1,37 +1,27 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  Image,
-  ImageSourcePropType,
-  DimensionValue,
-} from "react-native";
+import { TouchableOpacity, StyleProp, ViewStyle } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "./screenheader.style";
 
 interface ScreenHeaderBtnProps {
-  iconUrl: ImageSourcePropType;
-  dimension: DimensionValue;
+  icon: string;
+  iconSize?: number;
+  iconColor?: string;
+  style?: StyleProp<ViewStyle>;
   onPress?: () => void;
 }
 
 const ScreenHeaderBtn = ({
-  iconUrl,
-  dimension,
+  icon,
+  iconSize = 20,
+  iconColor,
+  style,
   onPress,
 }: ScreenHeaderBtnProps) => {
   return (
-    <TouchableOpacity style={styles.btnContainer} onPress={onPress}>
-      <Image
-        style={[
-          styles.btnImg,
-          {
-            width: dimension,
-            height: dimension,
-          },
-        ]}
-        source={iconUrl}
-        resizeMode="cover"
-      />
+    <TouchableOpacity style={[styles.btnContainer, style]} onPress={onPress}>
+      <Ionicons name={icon as any} size={iconSize} color={iconColor} />
     </TouchableOpacity>
   );
 };

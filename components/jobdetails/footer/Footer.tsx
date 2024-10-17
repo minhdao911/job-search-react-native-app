@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image, Linking } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { COLORS } from "@/constants";
 
 import styles from "./footer.style";
-import { icons } from "@/constants";
 
 interface FooterProps {
   url: string;
@@ -12,7 +13,7 @@ const Footer = ({ url }: FooterProps) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.likeBtn}>
-        <Image style={styles.likeBtnImage} source={icons.heartOutline} />
+        <Ionicons name="heart-outline" size={25} color={COLORS.tertiary} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.applyBtn}

@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  Linking,
-} from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Linking } from "react-native";
 import { JobEmployerReview } from "@/types/jsearch";
-import { icons } from "@/constants";
+import { COLORS } from "@/constants";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import commonStyles from "@/styles/common";
 import styles from "./reviews.style";
@@ -39,22 +33,24 @@ const Reviews = ({ data }: ReviewsProps) => {
                 {Array(full)
                   .fill(true)
                   .map((_, index) => (
-                    <Image
-                      key={`full-${index}`}
-                      style={styles.starImage}
-                      source={icons.star}
+                    <Ionicons
+                      key={index}
+                      name="star"
+                      size={16}
+                      color={COLORS.yellow}
                     />
                   ))}
                 {half > 0 && (
-                  <Image style={styles.starImage} source={icons.starHalf} />
+                  <Ionicons name="star-half" size={16} color={COLORS.yellow} />
                 )}
                 {Array(empty)
                   .fill(true)
                   .map((_, index) => (
-                    <Image
-                      key={`empty-${index}`}
-                      style={styles.starImage}
-                      source={icons.starEmpty}
+                    <Ionicons
+                      key={index}
+                      name="star-outline"
+                      size={16}
+                      color={COLORS.yellow}
                     />
                   ))}
               </View>
@@ -65,6 +61,7 @@ const Reviews = ({ data }: ReviewsProps) => {
           </View>
         );
       }}
+      showsVerticalScrollIndicator={false}
     />
   ) : (
     <Text style={commonStyles.infoText}>No reviews</Text>

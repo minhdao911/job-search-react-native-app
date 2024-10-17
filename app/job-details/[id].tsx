@@ -56,14 +56,11 @@ const JobDetails = () => {
           headerBackVisible: false,
           headerLeft: () => (
             <ScreenHeaderBtn
-              iconUrl={icons.left}
-              dimension={20}
+              icon="chevron-back"
               onPress={() => router.back()}
             />
           ),
-          headerRight: () => (
-            <ScreenHeaderBtn iconUrl={icons.share} dimension={20} />
-          ),
+          headerRight: () => <ScreenHeaderBtn icon="share-social-outline" />,
           headerTitle: "",
         }}
       />
@@ -75,13 +72,7 @@ const JobDetails = () => {
         ) : jobData.length === 0 ? (
           <Text style={commonStyles.infoText}>No data</Text>
         ) : (
-          <View
-            style={{
-              flex: 1,
-              padding: SIZES.large,
-              paddingBottom: 95,
-            }}
-          >
+          <View style={[commonStyles.screenContainer, { paddingBottom: 95 }]}>
             <Company
               name={jobData[0].employer_name}
               logo={jobData[0].employer_logo}

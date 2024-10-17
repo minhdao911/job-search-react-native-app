@@ -47,11 +47,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  searchBtnImage: {
-    width: "50%",
-    height: "50%",
-    tintColor: COLORS.white,
-  },
   tabsContainer: {
     gap: SIZES.small,
     width: "100%",

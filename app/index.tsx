@@ -10,6 +10,8 @@ import {
   Welcome,
 } from "@/components";
 
+import styles from "@/styles/common";
+
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
 
@@ -26,12 +28,8 @@ const Home = () => {
         options={{
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
-          headerLeft: () => (
-            <ScreenHeaderBtn iconUrl={icons.menu} dimension={20} />
-          ),
-          headerRight: () => (
-            <ScreenHeaderBtn iconUrl={icons.profile} dimension={30} />
-          ),
+          headerLeft: () => <ScreenHeaderBtn icon="menu" />,
+          headerRight: () => <ScreenHeaderBtn icon="people" />,
           headerTitle: "",
         }}
       />
@@ -41,7 +39,7 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <View style={{ flex: 1, padding: SIZES.large }}>
+        <View style={styles.screenContainer}>
           <Welcome />
           <PopularJobs refreshing={refreshing} />
           <NearbyJobs refreshing={refreshing} />

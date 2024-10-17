@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text } from "react-native";
 import Logo from "../../common/logo/Logo";
-import { icons } from "@/constants";
+import { COLORS } from "@/constants";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "./company.style";
 
@@ -22,7 +23,7 @@ const Company = ({ name, logo, jobTitle, location }: CompanyProps) => {
       <View style={styles.companyInfoBox}>
         <Text style={styles.companyName}>{name}</Text>
         <View style={styles.locationBox}>
-          <Image style={styles.locationImage} source={icons.location} />
+          <Ionicons name="location-outline" size={14} color={COLORS.gray} />
           <Text style={styles.locationName}>{location}</Text>
         </View>
       </View>

@@ -18,7 +18,8 @@ const Tabs = ({ tabs, activeTab, setActiveTab }: TabsProps) => {
           style={[
             styles.btn,
             {
-              backgroundColor: name === activeTab ? COLORS.primary : "#F3F4F8",
+              backgroundColor:
+                name === activeTab ? COLORS.primary : COLORS.white,
             },
           ]}
           onPress={() => setActiveTab(name)}
@@ -27,7 +28,7 @@ const Tabs = ({ tabs, activeTab, setActiveTab }: TabsProps) => {
             style={[
               styles.btnText,
               {
-                color: name === activeTab ? "#C3BFCC" : "#AAA9B8",
+                color: name === activeTab ? "#FFF" : COLORS.gray,
               },
             ]}
           >

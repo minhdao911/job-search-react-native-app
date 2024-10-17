@@ -71,6 +71,8 @@ const JobDetailsQuerySchema = CommonJobDetailsQuerySchema.extend({
 });
 export type JobDetailsQuery = z.infer<typeof JobDetailsQuerySchema>;
 
+export type JobQuery = JobSearchQuery | JobSearchFiltersQuery | JobDetailsQuery;
+
 const JobRequiredExperienceSchema = z.object({
   no_experience_required: z.string(),
   required_experience_in_months: z.coerce.number(),

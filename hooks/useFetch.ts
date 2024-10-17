@@ -1,29 +1,16 @@
-import { RAPID_API_KEY } from "@env";
 import {
   Endpoint,
-  JobDetailsQuery,
   JobDetailsResponseSchema,
-  JobSearchFiltersQuery,
+  JobQuery,
   JobSearchFiltersResponseSchema,
-  JobSearchQuery,
   JobSearchResponseSchema,
 } from "@/types/jsearch";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { getOptions } from "@/utils/jsearch";
 
-const useFetch = (
-  endpoint: Endpoint,
-  query: JobSearchQuery | JobSearchFiltersQuery | JobDetailsQuery
-) => {
-  const options = {
-    method: "GET",
-    url: `https://jsearch.p.rapidapi.com/${endpoint}`,
-    params: query,
-    headers: {
-      "x-rapidapi-key": RAPID_API_KEY,
-      "x-rapidapi-host": "jsearch.p.rapidapi.com",
-    },
-  };
+const useFetch = (endpoint: Endpoint, query: JobQuery) => {
+  const options = getOptions(endpoint, query);
 
   const fetchData = async () => {
     const response = await axios.request(options);
@@ -45,15 +32,15 @@ const useFetch = (
     }
   };
 
-  const { data, isLoading, error, refetch } = useQuery({
-    queryKey: [endpoint],
+  const { data, error, isLoading, isFetching, refetch } = useQuery({
+    queryKey: [endpoint, query],
     queryFn: fetchData,
-    cacheTime: 10 * 60 * 1000,
+    staleTime: 60 * 60 * 1000,
   });
 
   return {
     data,
-    isLoading,
+    isLoading: isLoading || isFetching,
     error,
     refetch,
   };

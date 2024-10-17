@@ -36,10 +36,6 @@ const styles = StyleSheet.create({
     fontFamily: FONT.regular,
     marginLeft: SIZES.small,
   },
-  noHighlights: {
-    padding: SIZES.large,
-    color: COLORS.secondary,
-  },
 });
 
 export default styles;

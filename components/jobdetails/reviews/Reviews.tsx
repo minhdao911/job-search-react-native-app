@@ -8,9 +8,10 @@ import {
   Linking,
 } from "react-native";
 import { JobEmployerReview } from "@/types/jsearch";
-
-import styles from "./reviews.style";
 import { icons } from "@/constants";
+
+import commonStyles from "@/styles/common";
+import styles from "./reviews.style";
 
 interface ReviewsProps {
   data: JobEmployerReview[];
@@ -66,7 +67,7 @@ const Reviews = ({ data }: ReviewsProps) => {
       }}
     />
   ) : (
-    <Text style={styles.noReviews}>No reviews</Text>
+    <Text style={commonStyles.infoText}>No reviews</Text>
   );
 };
 

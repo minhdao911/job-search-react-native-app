@@ -94,6 +94,7 @@ const JobHighlightsSchema = z.object({
   Responsibilities: z.array(z.string()).nullish(),
   Benefits: z.array(z.string()).nullish(),
 });
+export type JobHighlights = z.infer<typeof JobHighlightsSchema>;
 
 const JobApplyOptionSchema = z.object({
   publisher: z.string(),

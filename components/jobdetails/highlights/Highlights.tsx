@@ -1,6 +1,7 @@
 import { JobHighlights } from "@/types/jsearch";
 import { ScrollView, Text, View } from "react-native";
 
+import commonStyles from "@/styles/common";
 import styles from "./highlights.style";
 
 interface HighlightsProps {
@@ -19,7 +20,7 @@ const Highlights = ({ data }: HighlightsProps) => {
       {data.Benefits && <Specifics title="Benefits:" points={data.Benefits} />}
     </ScrollView>
   ) : (
-    <Text style={styles.noHighlights}>No highlights</Text>
+    <Text style={commonStyles.infoText}>No highlights</Text>
   );
 };
 

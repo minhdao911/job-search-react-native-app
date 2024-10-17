@@ -14,7 +14,9 @@ import { Endpoint, JobDetailsResponseData } from "@/types/jsearch";
 import { getLocation } from "@/utils";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
+
+import commonStyles from "@/styles/common";
 
 enum Tab {
   Description = "Description",
@@ -28,25 +30,18 @@ const JobDetails = () => {
   const { data, isLoading, error } = useFetch(Endpoint.Details, {
     job_id: id as string,
   });
+  const jobData = data as JobDetailsResponseData[];
 
   const [activeTab, setActiveTab] = useState<Tab>(Tab.Description);
 
-  const displayTabContent = () => {
+  const displayTabContent = (data: JobDetailsResponseData) => {
     switch (activeTab) {
       case Tab.Description:
-        return <JobAbout data={data[0] as JobDetailsResponseData} />;
+        return <JobAbout data={data} />;
       case Tab.Highlights:
-        return (
-          <Highlights
-            data={(data[0] as JobDetailsResponseData).job_highlights}
-          />
-        );
+        return <Highlights data={data.job_highlights} />;
       case Tab.Reviews:
-        return (
-          <Reviews
-            data={(data[0] as JobDetailsResponseData).employer_reviews}
-          />
-        );
+        return <Reviews data={data.employer_reviews} />;
       default:
         return null;
     }
@@ -76,24 +71,30 @@ const JobDetails = () => {
         {isLoading ? (
           <ActivityIndicator color={COLORS.primary} />
         ) : error ? (
-          <Text style={styles.noResults}>Something went wrong</Text>
-        ) : data.length === 0 ? (
-          <Text style={styles.noResults}>No data</Text>
+          <Text style={commonStyles.infoText}>Something went wrong</Text>
+        ) : jobData.length === 0 ? (
+          <Text style={commonStyles.infoText}>No data</Text>
         ) : (
-          <View style={styles.container}>
+          <View
+            style={{
+              flex: 1,
+              padding: SIZES.large,
+              paddingBottom: 95,
+            }}
+          >
             <Company
-              name={data[0].employer_name}
-              logo={data[0].employer_logo}
-              jobTitle={data[0].job_title}
-              location={getLocation(data[0])}
+              name={jobData[0].employer_name}
+              logo={jobData[0].employer_logo}
+              jobTitle={jobData[0].job_title}
+              location={getLocation(jobData[0])}
             />
             <JobTabs
               tabs={Object.values(Tab)}
               activeTab={activeTab}
               setActiveTab={setActiveTab}
             />
-            {displayTabContent()}
-            <Footer url={data[0].job_apply_link} />
+            {displayTabContent(jobData[0])}
+            <Footer url={jobData[0].job_apply_link} />
           </View>
         )}
       </>
@@ -102,15 +103,3 @@ const JobDetails = () => {
 };
 
 export default JobDetails;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: SIZES.large,
-    paddingBottom: 95,
-  },
-  noResults: {
-    padding: SIZES.large,
-    color: COLORS.secondary,
-  },
-});

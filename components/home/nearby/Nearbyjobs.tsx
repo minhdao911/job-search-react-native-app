@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import useFetch from "@/hooks/useFetch";
-import { Endpoint } from "@/types/jsearch";
+import { Endpoint, JobSearchResponseData } from "@/types/jsearch";
 import { COLORS } from "@/constants";
 import NearbyJobCard from "@/components/common/cards/nearby/NearbyJobCard";
 
+import commonStyles from "@/styles/common";
 import styles from "./nearbyjobs.style";
 
 interface NearbyJobsProps {
@@ -20,6 +21,7 @@ const NearbyJobs = ({ refreshing }: NearbyJobsProps) => {
     radius: 100,
     num_pages: 1,
   });
+  const jobData = data as JobSearchResponseData[];
 
   useEffect(() => {
     if (refreshing) {
@@ -39,9 +41,9 @@ const NearbyJobs = ({ refreshing }: NearbyJobsProps) => {
         {isLoading ? (
           <ActivityIndicator color={COLORS.primary} />
         ) : error ? (
-          <Text>Something went wrong</Text>
+          <Text style={commonStyles.infoText}>Something went wrong</Text>
         ) : (
-          data.map((item) => (
+          jobData.map((item) => (
             <NearbyJobCard
               key={`nearby-job-${item.job_id}`}
               item={item}

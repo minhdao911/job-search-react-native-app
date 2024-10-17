@@ -10,8 +10,9 @@ import { COLORS, SIZES } from "@/constants";
 import PopularJobCard from "@/components/common/cards/popular/PopularJobCard";
 import useFetch from "@/hooks/useFetch";
 import { useRouter } from "expo-router";
-import { Endpoint } from "@/types/jsearch";
+import { Endpoint, JobSearchResponseData } from "@/types/jsearch";
 
+import commonStyles from "@/styles/common";
 import styles from "./popularjobs.style";
 
 interface PopularJobsProps {
@@ -25,6 +26,7 @@ const PopularJobs = ({ refreshing }: PopularJobsProps) => {
     query: "NodeJS developer in USA",
     num_pages: 1,
   });
+  const jobData = data as JobSearchResponseData[];
 
   useEffect(() => {
     if (refreshing) {
@@ -44,10 +46,10 @@ const PopularJobs = ({ refreshing }: PopularJobsProps) => {
         {isLoading ? (
           <ActivityIndicator color={COLORS.primary} />
         ) : error ? (
-          <Text>Something went wrong</Text>
+          <Text style={commonStyles.infoText}>Something went wrong</Text>
         ) : (
           <FlatList
-            data={data}
+            data={jobData}
             renderItem={({ item }) => (
               <PopularJobCard
                 item={item}

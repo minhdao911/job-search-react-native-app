@@ -14,18 +14,6 @@ const styles = StyleSheet.create({
     ...SHADOWS.medium,
     shadowColor: COLORS.white,
   },
-  logoContainer: {
-    width: 50,
-    height: 50,
-    backgroundColor: COLORS.white,
-    borderRadius: SIZES.medium,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  logoImage: {
-    width: "70%",
-    height: "70%",
-  },
   textContainer: {
     flex: 1,
     marginHorizontal: SIZES.medium,
@@ -35,21 +23,17 @@ const styles = StyleSheet.create({
     fontFamily: "DMBold",
     color: COLORS.primary,
   },
-  infoWrapper: {
-    marginTop: 3,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 3,
-  },
   companyName: {
     fontSize: SIZES.small,
     fontFamily: FONT.bold,
     color: COLORS.gray,
+    marginBottom: 1,
   },
   jobType: {
     fontSize: SIZES.small,
     fontFamily: "DMRegular",
     color: COLORS.gray,
+    marginTop: 5,
   },
 });
 

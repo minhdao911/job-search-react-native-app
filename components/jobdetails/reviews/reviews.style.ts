@@ -49,10 +49,6 @@ const styles = StyleSheet.create({
     fontFamily: FONT.regular,
     color: COLORS.secondary,
   },
-  noReviews: {
-    padding: SIZES.large,
-    color: COLORS.secondary,
-  },
 });
 
 export default styles;

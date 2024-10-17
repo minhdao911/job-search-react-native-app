@@ -16,13 +16,11 @@ const NearbyJobCard = ({ item, onPress }: PopularJobCardProps) => {
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Logo src={item.employer_logo} />
       <View style={styles.textContainer}>
+        <Text style={styles.companyName}>{item.employer_name}</Text>
         <Text style={styles.jobName}>{item.job_title}</Text>
-        <View style={styles.infoWrapper}>
-          <Text style={styles.companyName}>{item.employer_name},</Text>
-          <Text style={styles.jobType}>
-            {getEmploymentType(item.job_employment_type)}
-          </Text>
-        </View>
+        <Text style={styles.jobType}>
+          {getEmploymentType(item.job_employment_type)}
+        </Text>
       </View>
     </TouchableOpacity>
   );

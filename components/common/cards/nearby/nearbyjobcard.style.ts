@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, SHADOWS, SIZES } from "../../../../constants";
+import { COLORS, FONT, SHADOWS, SIZES } from "../../../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -35,11 +35,21 @@ const styles = StyleSheet.create({
     fontFamily: "DMBold",
     color: COLORS.primary,
   },
+  infoWrapper: {
+    marginTop: 3,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+  },
+  companyName: {
+    fontSize: SIZES.small,
+    fontFamily: FONT.bold,
+    color: COLORS.gray,
+  },
   jobType: {
     fontSize: SIZES.small,
     fontFamily: "DMRegular",
     color: COLORS.gray,
-    marginTop: 3,
   },
 });
 

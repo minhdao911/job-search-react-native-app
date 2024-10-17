@@ -90,9 +90,9 @@ const JobRequiredEducationSchema = z.object({
 });
 
 const JobHighlightsSchema = z.object({
-  Qualifications: z.array(z.string()).nullable(),
-  Responsibilities: z.array(z.string()).nullable(),
-  Benefits: z.array(z.string()).nullable(),
+  Qualifications: z.array(z.string()).nullish(),
+  Responsibilities: z.array(z.string()).nullish(),
+  Benefits: z.array(z.string()).nullish(),
 });
 
 const JobApplyOptionSchema = z.object({
@@ -132,10 +132,10 @@ const JobFilterPropsSchema = z.object({
 const JobSearchResponseDataSchema = z.object({
   job_id: z.string(),
   employer_name: z.string(),
-  employer_logo: z.string().nullish(),
-  employer_website: z.string().nullish(),
-  employer_company_type: z.string().nullish(),
-  employer_linkedin: z.string().nullish(),
+  employer_logo: z.string().nullable(),
+  employer_website: z.string().nullable(),
+  employer_company_type: z.string().nullable(),
+  employer_linkedin: z.string().nullable(),
   job_employment_type: z.nativeEnum(EmploymentType),
   job_title: z.string(),
   job_publisher: z.string(),
@@ -146,23 +146,23 @@ const JobSearchResponseDataSchema = z.object({
   job_is_remote: z.boolean(),
   job_posted_at_timestamp: z.number(),
   job_posted_at_datetime_utc: z.string(),
-  job_city: z.string().nullish(),
-  job_state: z.string().nullish(),
+  job_city: z.string().nullable(),
+  job_state: z.string().nullable(),
   job_country: z.string(),
   job_latitude: z.number(),
   job_longitude: z.number(),
   job_google_link: z.string(),
-  job_offer_expiration_datetime_utc: z.string().nullish(),
-  job_offer_expiration_timestamp: z.number().nullish(),
+  job_offer_expiration_datetime_utc: z.string().nullable(),
+  job_offer_expiration_timestamp: z.number().nullable(),
   job_required_experience: JobRequiredExperienceSchema.optional(),
-  job_required_skills: z.array(z.string()).nullish(),
+  job_required_skills: z.array(z.string()).nullable(),
   job_required_education: JobRequiredEducationSchema.optional(),
-  job_min_salary: z.number().nullish(),
-  job_max_salary: z.number().nullish(),
-  job_salary_currency: z.string().nullish(),
-  job_salary_period: z.nativeEnum(SalaryPeriod).nullish(),
+  job_min_salary: z.number().nullable(),
+  job_max_salary: z.number().nullable(),
+  job_salary_currency: z.string().nullable(),
+  job_salary_period: z.nativeEnum(SalaryPeriod).nullable(),
   job_hightlights: JobHighlightsSchema.optional(),
-  job_job_title: z.string().nullish(),
+  job_job_title: z.string().nullable(),
   job_posting_language: z.string(),
 });
 export type JobSearchResponseData = z.infer<typeof JobSearchResponseDataSchema>;

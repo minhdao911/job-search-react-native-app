@@ -9,10 +9,12 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@types/react": "~18.2.79",
     "axios": "^1.7.7",
     "expo": "^51.0.0",
     "expo-constants": "~16.0.1",
     "expo-font": "^12.0.10",
+    "expo-linear-gradient": "^13.0.2",
     "expo-linking": "~6.3.1",
     "expo-router": "~3.5.9",
     "expo-splash-screen": "~0.27.4",
@@ -26,7 +28,6 @@
     "react-native-screens": "3.31.1",
     "react-native-web": "~0.19.6",
     "typescript": "~5.3.3",
-    "@types/react": "~18.2.79"
     "zod": "^3.23.8"
   },
   "devDependencies": {

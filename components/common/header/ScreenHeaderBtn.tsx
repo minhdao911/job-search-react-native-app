@@ -11,11 +11,16 @@ import styles from "./screenheader.style";
 interface ScreenHeaderBtnProps {
   iconUrl: ImageSourcePropType;
   dimension: DimensionValue;
+  onPress?: () => void;
 }
 
-const ScreenHeaderBtn = ({ iconUrl, dimension }: ScreenHeaderBtnProps) => {
+const ScreenHeaderBtn = ({
+  iconUrl,
+  dimension,
+  onPress,
+}: ScreenHeaderBtnProps) => {
   return (
-    <TouchableOpacity style={styles.btnContainer}>
+    <TouchableOpacity style={styles.btnContainer} onPress={onPress}>
       <Image
         style={[
           styles.btnImg,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -14,13 +14,23 @@ import { Endpoint } from "@/types/jsearch";
 
 import styles from "./popularjobs.style";
 
-const Popularjobs = () => {
+interface PopularJobsProps {
+  refreshing: boolean;
+}
+
+const PopularJobs = ({ refreshing }: PopularJobsProps) => {
   const router = useRouter();
 
-  const { data, isLoading, error } = useFetch(Endpoint.Search, {
-    query: "React developer",
+  const { data, isLoading, error, refetch } = useFetch(Endpoint.Search, {
+    query: "NodeJS developer in USA",
     num_pages: 1,
   });
+
+  useEffect(() => {
+    if (refreshing) {
+      refetch();
+    }
+  }, [refreshing]);
 
   return (
     <View style={styles.container}>
@@ -54,4 +64,4 @@ const Popularjobs = () => {
   );
 };
 
-export default Popularjobs;
+export default PopularJobs;

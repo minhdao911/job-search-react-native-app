@@ -16,25 +16,29 @@ const styles = StyleSheet.create({
   },
   pointsContainer: {
     marginVertical: SIZES.small,
+    gap: 5,
   },
   pointWrapper: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    marginVertical: SIZES.small / 1.25,
   },
   pointDot: {
     width: 6,
     height: 6,
     borderRadius: 6,
-    backgroundColor: COLORS.gray2,
+    backgroundColor: COLORS.secondary,
     marginTop: 6,
   },
   pointText: {
-    fontSize: SIZES.medium - 2,
-    color: COLORS.gray,
+    fontSize: SIZES.medium,
+    color: COLORS.secondary,
     fontFamily: FONT.regular,
     marginLeft: SIZES.small,
+  },
+  noHighlights: {
+    padding: SIZES.large,
+    color: COLORS.secondary,
   },
 });
 

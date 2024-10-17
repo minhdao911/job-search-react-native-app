@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { JobSearchResponseData } from "@/types/jsearch";
+import Logo from "../../logo/Logo";
+import { getEmploymentType } from "@/utils";
 
 import styles from "./nearbyjobcard.style";
-import { getEmploymentType } from "@/utils";
-import Logo from "../../logo/Logo";
 
 interface PopularJobCardProps {
   item: JobSearchResponseData;

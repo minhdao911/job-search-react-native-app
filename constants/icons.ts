@@ -10,6 +10,9 @@ import chevronLeft from "../assets/icons/chevron-left.png";
 import chevronRight from "../assets/icons/chevron-right.png";
 import profile from "../assets/icons/profile.png";
 import logoPlaceholder from "../assets/icons/logo-placeholder.png";
+import star from "../assets/icons/star.png";
+import starEmpty from "../assets/icons/star-empty.png";
+import starHalf from "../assets/icons/star-half.png";
 
 export default {
   heart,
@@ -24,4 +27,7 @@ export default {
   chevronRight,
   profile,
   logoPlaceholder,
+  star,
+  starEmpty,
+  starHalf,
 };

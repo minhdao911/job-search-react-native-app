@@ -1,32 +1,27 @@
-import React from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import React, { useCallback, useState } from "react";
+import { RefreshControl, ScrollView, View } from "react-native";
 import { COLORS, icons, SIZES } from "../constants";
 import { Stack } from "expo-router";
 import {
-  Nearbyjobs,
-  Popularjobs,
+  NearbyJobs,
+  PopularJobs,
+  ScreenContainer,
   ScreenHeaderBtn,
   Welcome,
 } from "@/components";
-import { LinearGradient } from "expo-linear-gradient";
 
 const Home = () => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  }, []);
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
-      <LinearGradient
-        colors={[COLORS.lightWhite, COLORS.white]}
-        start={{
-          x: 0,
-          y: 0.3,
-        }}
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: 0,
-          height: "100%",
-        }}
-      />
+    <ScreenContainer>
       <Stack.Screen
         options={{
           headerStyle: { backgroundColor: COLORS.lightWhite },
@@ -40,14 +35,19 @@ const Home = () => {
           headerTitle: "",
         }}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={{ flex: 1, padding: SIZES.large }}>
           <Welcome />
-          <Popularjobs />
-          <Nearbyjobs />
+          <PopularJobs refreshing={refreshing} />
+          <NearbyJobs refreshing={refreshing} />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 

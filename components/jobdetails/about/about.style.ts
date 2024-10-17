@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     marginTop: SIZES.large,
     backgroundColor: "#FFF",
     borderRadius: SIZES.medium,
-    padding: SIZES.medium,
+    padding: SIZES.large,
   },
   headText: {
     fontSize: SIZES.large,
@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
     fontFamily: FONT.bold,
   },
   contentBox: {
-    marginVertical: SIZES.small,
+    marginTop: 3,
   },
   contextText: {
-    fontSize: SIZES.medium - 2,
-    color: COLORS.gray,
+    fontSize: SIZES.medium,
+    color: COLORS.secondary,
     fontFamily: FONT.regular,
     marginVertical: SIZES.small / 1.25,
   },

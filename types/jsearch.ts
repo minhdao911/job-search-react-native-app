@@ -102,7 +102,7 @@ const JobApplyOptionSchema = z.object({
 });
 
 const JobEstimatedSalarySchema = z.object({
-  location: z.string(),
+  location: z.string().nullable(),
   job_title: z.string(),
   publisher_name: z.string(),
   publisher_link: z.string(),
@@ -122,6 +122,7 @@ const JobEmployerReviewSchema = z.object({
   max_score: z.number(),
   reviews_link: z.string(),
 });
+export type JobEmployerReview = z.infer<typeof JobEmployerReviewSchema>;
 
 const JobFilterPropsSchema = z.object({
   name: z.string(),
@@ -161,7 +162,7 @@ const JobSearchResponseDataSchema = z.object({
   job_max_salary: z.number().nullable(),
   job_salary_currency: z.string().nullable(),
   job_salary_period: z.nativeEnum(SalaryPeriod).nullable(),
-  job_hightlights: JobHighlightsSchema.optional(),
+  job_highlights: JobHighlightsSchema.optional(),
   job_job_title: z.string().nullable(),
   job_posting_language: z.string(),
 });

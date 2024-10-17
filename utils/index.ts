@@ -1,4 +1,4 @@
-import { EmploymentType } from "@/types/jsearch";
+import { EmploymentType, JobSearchResponseData } from "@/types/jsearch";
 
 export const getEmploymentType = (type: EmploymentType) => {
   switch (type) {
@@ -9,4 +9,9 @@ export const getEmploymentType = (type: EmploymentType) => {
     default:
       return type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
   }
+};
+
+export const getLocation = (data: Partial<JobSearchResponseData>) => {
+  const { job_city, job_country } = data;
+  return `${job_city ? job_city + ", " : ""}${job_country}`;
 };

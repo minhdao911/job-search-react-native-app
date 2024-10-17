@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import useFetch from "@/hooks/useFetch";
@@ -8,14 +8,24 @@ import NearbyJobCard from "@/components/common/cards/nearby/NearbyJobCard";
 
 import styles from "./nearbyjobs.style";
 
-const Nearbyjobs = () => {
+interface NearbyJobsProps {
+  refreshing: boolean;
+}
+
+const NearbyJobs = ({ refreshing }: NearbyJobsProps) => {
   const router = useRouter();
 
-  const { data, isLoading, error } = useFetch(Endpoint.Search, {
+  const { data, isLoading, error, refetch } = useFetch(Endpoint.Search, {
     query: "React developer",
     radius: 100,
     num_pages: 1,
   });
+
+  useEffect(() => {
+    if (refreshing) {
+      refetch();
+    }
+  }, [refreshing]);
 
   return (
     <View style={styles.container}>
@@ -44,4 +54,4 @@ const Nearbyjobs = () => {
   );
 };
 
-export default Nearbyjobs;
+export default NearbyJobs;

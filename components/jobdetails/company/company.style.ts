@@ -8,18 +8,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  logoBox: {
-    width: 80,
-    height: 80,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FFF",
-    borderRadius: SIZES.large,
-  },
-  logoImage: {
-    width: "80%",
-    height: "80%",
-  },
   jobTitleBox: {
     marginTop: SIZES.small,
   },
@@ -34,9 +22,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    gap: 5,
   },
   companyName: {
-    fontSize: SIZES.medium - 2,
+    fontSize: SIZES.medium,
     color: COLORS.primary,
     fontFamily: FONT.medium,
   },
@@ -51,8 +40,8 @@ const styles = StyleSheet.create({
     tintColor: COLORS.gray,
   },
   locationName: {
-    fontSize: SIZES.medium - 2,
-    color: COLORS.gray,
+    fontSize: SIZES.medium,
+    color: COLORS.primary,
     fontFamily: FONT.regular,
     marginLeft: 2,
   },

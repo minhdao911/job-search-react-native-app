@@ -6,16 +6,17 @@ import styles from "./logo.style";
 
 interface LogoProps {
   src: string | null;
+  size?: "default" | "large";
   style?: StyleProp<ViewStyle>;
 }
 
-const Logo = ({ src, style }: LogoProps) => {
+const Logo = ({ src, style, size = "default" }: LogoProps) => {
   const [logo, setLogo] = useState<string | null>(src);
 
   return (
-    <View style={[styles.logoContainer, style]}>
+    <View style={[styles.logoContainer, styles[`${size}Container`], style]}>
       <Image
-        style={styles.logoImage}
+        style={styles[`${size}Image`]}
         source={logo ? { uri: logo } : icons.logoPlaceholder}
         onError={() => setLogo(null)}
       />

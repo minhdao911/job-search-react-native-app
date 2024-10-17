@@ -48,8 +48,7 @@ const useFetch = (
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: [endpoint],
     queryFn: fetchData,
-    staleTime: Infinity,
-    cacheTime: 60 * 60 * 1000,
+    cacheTime: 10 * 60 * 1000,
   });
 
   return {

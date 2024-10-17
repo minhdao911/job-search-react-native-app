@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderRadius: SIZES.large,
   },
+  smallContainer: {
+    width: 30,
+    height: 30,
+    backgroundColor: COLORS.white,
+    borderRadius: SIZES.medium,
+  },
   defaultImage: {
     width: "70%",
     height: "70%",
@@ -27,6 +33,10 @@ const styles = StyleSheet.create({
   largeImage: {
     width: "80%",
     height: "80%",
+  },
+  smallImage: {
+    width: "70%",
+    height: "70%",
   },
 });
 

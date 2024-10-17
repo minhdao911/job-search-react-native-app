@@ -104,14 +104,14 @@ const JobApplyOptionSchema = z.object({
 
 const JobEstimatedSalarySchema = z.object({
   location: z.string().nullable(),
-  job_title: z.string(),
-  publisher_name: z.string(),
-  publisher_link: z.string(),
-  min_salary: z.number(),
-  max_salary: z.number(),
-  median_salary: z.number(),
-  salary_period: z.nativeEnum(SalaryPeriod),
-  salary_currency: z.string(),
+  job_title: z.string().nullable(),
+  publisher_name: z.string().nullable(),
+  publisher_link: z.string().nullable(),
+  min_salary: z.number().nullable(),
+  max_salary: z.number().nullable(),
+  median_salary: z.number().nullable(),
+  salary_period: z.nativeEnum(SalaryPeriod).nullable(),
+  salary_currency: z.string().nullable(),
 });
 
 const JobEmployerReviewSchema = z.object({

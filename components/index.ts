@@ -2,6 +2,7 @@
 import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
 import Logo from "./common/logo/Logo";
 import ScreenContainer from "./common/screen-container/ScreenContainer";
+import SearchResultCard from "./common/cards/search-result/SearchResultCard";
 
 // home screen
 import Welcome from "./home/welcome/Welcome";
@@ -20,6 +21,7 @@ export {
   ScreenHeaderBtn,
   Logo,
   ScreenContainer,
+  SearchResultCard,
   Welcome,
   NearbyJobs,
   PopularJobs,

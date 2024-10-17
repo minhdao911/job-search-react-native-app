@@ -6,7 +6,7 @@ import styles from "./logo.style";
 
 interface LogoProps {
   src: string | null;
-  size?: "default" | "large";
+  size?: "small" | "default" | "large";
   style?: StyleProp<ViewStyle>;
 }
 

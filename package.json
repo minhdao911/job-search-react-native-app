@@ -27,6 +27,7 @@
     "react-native-web": "~0.19.6",
     "typescript": "~5.3.3",
     "@types/react": "~18.2.79"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

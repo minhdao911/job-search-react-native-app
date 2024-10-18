@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   primaryContainer: {
+    height: 50,
     backgroundColor: COLORS.tertiary,
     borderRadius: SIZES.medium,
   },

@@ -14,7 +14,7 @@ export enum EmploymentType {
   Temporary = "TEMPORARY",
 }
 
-export enum DayPosted {
+export enum DatePosted {
   All = "all",
   Today = "today",
   Threedays = "3days",
@@ -37,7 +37,7 @@ export enum SalaryPeriod {
 
 const CommonJobSearchQuerySchema = z.object({
   query: z.string(),
-  date_posted: z.nativeEnum(DayPosted).optional(),
+  date_posted: z.nativeEnum(DatePosted).optional(),
   remote_jobs_only: z.boolean().optional(),
   employment_types: z.string().optional(),
   job_requirements: z.string().optional(),

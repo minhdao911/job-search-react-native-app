@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from "react";
 import { RefreshControl, ScrollView, View } from "react-native";
-import { COLORS, icons, SIZES } from "../constants";
+import { COLORS } from "../constants";
 import { Stack } from "expo-router";
 import {
   NearbyJobs,
   PopularJobs,
   ScreenContainer,
-  ScreenHeaderBtn,
+  Button,
   Welcome,
 } from "@/components";
 
@@ -28,8 +28,8 @@ const Home = () => {
         options={{
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
-          headerLeft: () => <ScreenHeaderBtn icon="menu" />,
-          headerRight: () => <ScreenHeaderBtn icon="people" />,
+          headerLeft: () => <Button variant="icon" icon="menu" />,
+          headerRight: () => <Button variant="icon" icon="people" />,
           headerTitle: "",
         }}
       />

@@ -1,14 +1,20 @@
 import { Button, ScreenContainer, SearchResultCard } from "@/components";
-import { COLORS, icons, SIZES } from "@/constants";
+import { COLORS, SIZES } from "@/constants";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  Endpoint,
+  JobSearchQuery,
+  JobSearchResponseData,
+} from "@/types/jsearch";
+import useSearch from "@/hooks/useSearch";
+import { uniqBy } from "lodash";
+import FilterSheet from "@/components/search/filter-sheet/FilterSheet";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 import commonStyles from "@/styles/common";
 import styles from "@/styles/search";
-import { Endpoint, JobSearchResponseData } from "@/types/jsearch";
-import useSearch from "@/hooks/useSearch";
-import { uniqBy } from "lodash";
 
 const Search = () => {
   const { term } = useLocalSearchParams();
@@ -16,10 +22,11 @@ const Search = () => {
   const { data, isLoading, isSuccess, error, mutate } = useSearch(
     Endpoint.Search
   );
+  const sheetRef = useRef<BottomSheet>(null);
 
-  const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
   const [jobData, setJobData] = useState<JobSearchResponseData[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>(term as string);
 
   useEffect(() => {
     mutate({
@@ -35,6 +42,26 @@ const Search = () => {
       );
     }
   }, [data, isSuccess]);
+
+  const handleApplyFilter = (params: Partial<JobSearchQuery>) => {
+    const query = params.query
+      ? term + ` in ${params.query}`
+      : (term as string);
+
+    setJobData([]);
+    setSearchTerm(query);
+    mutate({
+      ...params,
+      query,
+      page: 1,
+    });
+    setPage(1);
+  };
+
+  const handleFetchMore = () => {
+    mutate({ query: searchTerm, page: page + 1 });
+    setPage(page + 1);
+  };
 
   return (
     <ScreenContainer>
@@ -61,6 +88,9 @@ const Search = () => {
             style={styles.filterBtn}
             icon="filter"
             iconColor={COLORS.white}
+            onPress={() => {
+              sheetRef.current?.expand();
+            }}
           />
         </View>
         <Text style={styles.noOfSearchedJobs}>
@@ -80,10 +110,7 @@ const Search = () => {
               rowGap: SIZES.medium,
             }}
             showsVerticalScrollIndicator={false}
-            onEndReached={() => {
-              mutate({ query: term as string, page: page + 1 });
-              setPage(page + 1);
-            }}
+            onEndReached={handleFetchMore}
           />
         )}
         <View style={styles.loaderContainer}>
@@ -96,6 +123,7 @@ const Search = () => {
           )}
         </View>
       </View>
+      <FilterSheet ref={sheetRef} onSubmit={handleApplyFilter} />
     </ScreenContainer>
   );
 };

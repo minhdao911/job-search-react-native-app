@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { JobSearchResponseData } from "@/types/jsearch";
 import Logo from "../../logo/Logo";
-import { getEmploymentType } from "@/utils";
+import { getEmploymentTypeText } from "@/utils";
 
 import styles from "./nearbyjobcard.style";
 
@@ -19,7 +19,7 @@ const NearbyJobCard = ({ item, onPress }: PopularJobCardProps) => {
         <Text style={styles.companyName}>{item.employer_name}</Text>
         <Text style={styles.jobName}>{item.job_title}</Text>
         <Text style={styles.jobType}>
-          {getEmploymentType(item.job_employment_type)}
+          {getEmploymentTypeText(item.job_employment_type)}
         </Text>
       </View>
     </TouchableOpacity>

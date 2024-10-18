@@ -3,13 +3,13 @@ import { View, Text, TextInput } from "react-native";
 import { useRouter } from "expo-router";
 import { COLORS } from "@/constants";
 import { EmploymentType } from "@/types/jsearch";
-import { getEmploymentType } from "@/utils";
+import { getEmploymentTypeText } from "@/utils";
 import Button from "@/components/common/button/Button";
 
 import styles from "./welcome.style";
 
 const tabs = Object.values(EmploymentType).map((type) => ({
-  name: getEmploymentType(type),
+  name: getEmploymentTypeText(type),
   value: type,
 }));
 

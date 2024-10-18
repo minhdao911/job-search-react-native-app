@@ -8,7 +8,7 @@ import {
   ScreenContainer,
 } from "@/components";
 import Footer from "@/components/jobdetails/footer/Footer";
-import { COLORS, icons, SIZES } from "@/constants";
+import { COLORS } from "@/constants";
 import useFetch from "@/hooks/useFetch";
 import { Endpoint, JobDetailsResponseData } from "@/types/jsearch";
 import { getLocation } from "@/utils";

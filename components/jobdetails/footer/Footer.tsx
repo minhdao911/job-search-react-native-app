@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image, Linking } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { View, Linking } from "react-native";
 import { COLORS } from "@/constants";
+import Button from "@/components/common/button/Button";
 
 import styles from "./footer.style";
 
@@ -12,15 +12,18 @@ interface FooterProps {
 const Footer = ({ url }: FooterProps) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.likeBtn}>
-        <Ionicons name="heart-outline" size={25} color={COLORS.tertiary} />
-      </TouchableOpacity>
-      <TouchableOpacity
+      <Button
+        variant="outline"
+        icon="heart-outline"
+        iconSize={25}
+        iconColor={COLORS.tertiary}
+        style={styles.likeBtn}
+      />
+      <Button
+        text="Apply for job"
         style={styles.applyBtn}
         onPress={() => Linking.openURL(url)}
-      >
-        <Text style={styles.applyBtnText}>Apply for job</Text>
-      </TouchableOpacity>
+      />
     </View>
   );
 };

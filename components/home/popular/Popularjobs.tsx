@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ActivityIndicator,
-  FlatList,
-} from "react-native";
+import { View, Text, ActivityIndicator, FlatList } from "react-native";
 import { COLORS, SIZES } from "@/constants";
 import PopularJobCard from "@/components/common/cards/popular/PopularJobCard";
 import useFetch from "@/hooks/useFetch";
 import { useRouter } from "expo-router";
 import { Endpoint, JobSearchResponseData } from "@/types/jsearch";
+import Button from "@/components/common/button/Button";
 
 import commonStyles from "@/styles/common";
 import styles from "./popularjobs.style";
@@ -37,10 +32,8 @@ const PopularJobs = ({ refreshing }: PopularJobsProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Popular jobs</Text>
-        <TouchableOpacity>
-          <Text style={styles.headerBtn}>Show all</Text>
-        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Recommended jobs</Text>
+        <Button variant="ghost" text="Show all" />
       </View>
       <View style={styles.cardsContainer}>
         {isLoading ? (

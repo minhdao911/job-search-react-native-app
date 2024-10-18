@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   btnText: {
     textAlign: "center",
     fontFamily: FONT.medium,
-    fontSize: SIZES.small,
+    fontSize: SIZES.medium,
   },
 });
 

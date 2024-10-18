@@ -1,11 +1,11 @@
 import {
+  Button,
   Company,
   Highlights,
   JobAbout,
   JobTabs,
   Reviews,
   ScreenContainer,
-  ScreenHeaderBtn,
 } from "@/components";
 import Footer from "@/components/jobdetails/footer/Footer";
 import { COLORS, icons, SIZES } from "@/constants";
@@ -55,12 +55,15 @@ const JobDetails = () => {
           headerShadowVisible: false,
           headerBackVisible: false,
           headerLeft: () => (
-            <ScreenHeaderBtn
+            <Button
+              variant="icon"
               icon="chevron-back"
               onPress={() => router.back()}
             />
           ),
-          headerRight: () => <ScreenHeaderBtn icon="share-social-outline" />,
+          headerRight: () => (
+            <Button variant="icon" icon="share-social-outline" />
+          ),
           headerTitle: "",
         }}
       />

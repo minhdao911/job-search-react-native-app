@@ -16,8 +16,6 @@ const styles = StyleSheet.create({
   },
   actionText: {
     fontSize: SIZES.small,
-    fontFamily: FONT.medium,
-    color: COLORS.gray,
   },
   publisher: {
     fontSize: SIZES.large,

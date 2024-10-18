@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, FlatList, TouchableOpacity, Linking } from "react-native";
+import { View, Text, FlatList, Linking } from "react-native";
 import { JobEmployerReview } from "@/types/jsearch";
 import { COLORS } from "@/constants";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Button from "@/components/common/button/Button";
 
 import commonStyles from "@/styles/common";
 import styles from "./reviews.style";
@@ -21,11 +22,12 @@ const Reviews = ({ data }: ReviewsProps) => {
           <View style={styles.container}>
             <View style={styles.headerContainer}>
               <Text style={styles.publisher}>{item.publisher}</Text>
-              <TouchableOpacity
+              <Button
+                variant="ghost"
+                text="Go to reviews"
+                textStyle={styles.actionText}
                 onPress={() => Linking.openURL(item.reviews_link)}
-              >
-                <Text style={styles.actionText}>Go to reviews</Text>
-              </TouchableOpacity>
+              />
             </View>
             <Text style={styles.reviewCount}>{item.review_count} reviews</Text>
             <View style={styles.scoreContainer}>

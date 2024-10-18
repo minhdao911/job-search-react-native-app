@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import useFetch from "@/hooks/useFetch";
 import { Endpoint, JobSearchResponseData } from "@/types/jsearch";
 import { COLORS } from "@/constants";
 import NearbyJobCard from "@/components/common/cards/nearby/NearbyJobCard";
+import Button from "@/components/common/button/Button";
 
 import commonStyles from "@/styles/common";
 import styles from "./nearbyjobs.style";
@@ -33,9 +34,7 @@ const NearbyJobs = ({ refreshing }: NearbyJobsProps) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Nearby jobs</Text>
-        <TouchableOpacity>
-          <Text style={styles.headerBtn}>Show all</Text>
-        </TouchableOpacity>
+        <Button variant="ghost" text="Show all" />
       </View>
       <View style={styles.cardsContainer}>
         {isLoading ? (

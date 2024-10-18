@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   pointsContainer: {
     marginVertical: SIZES.small,
-    gap: 5,
+    gap: 10,
   },
   pointWrapper: {
     flexDirection: "row",

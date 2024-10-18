@@ -42,10 +42,6 @@ const styles = StyleSheet.create({
   searchBtn: {
     width: 50,
     height: "100%",
-    backgroundColor: COLORS.tertiary,
-    borderRadius: SIZES.medium,
-    justifyContent: "center",
-    alignItems: "center",
   },
   tabsContainer: {
     gap: SIZES.small,

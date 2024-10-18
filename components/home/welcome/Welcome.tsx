@@ -1,17 +1,10 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { useRouter } from "expo-router";
-import { COLORS, SIZES } from "@/constants";
+import { COLORS } from "@/constants";
 import { EmploymentType } from "@/types/jsearch";
 import { getEmploymentType } from "@/utils";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Button from "@/components/common/button/Button";
 
 import styles from "./welcome.style";
 
@@ -42,12 +35,13 @@ const Welcome = () => {
             onChangeText={setSearchTerm}
           />
         </View>
-        <TouchableOpacity
+        <Button
           style={styles.searchBtn}
+          icon="search"
+          iconSize={30}
+          iconColor={COLORS.white}
           onPress={() => router.push(`/search/${searchTerm}`)}
-        >
-          <Ionicons name="search" size={30} color={COLORS.white} />
-        </TouchableOpacity>
+        />
       </View>
     </View>
   );

@@ -1,8 +1,8 @@
 // common
-import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
 import Logo from "./common/logo/Logo";
 import ScreenContainer from "./common/screen-container/ScreenContainer";
 import SearchResultCard from "./common/cards/search-result/SearchResultCard";
+import Button from "./common/button/Button";
 
 // home screen
 import Welcome from "./home/welcome/Welcome";
@@ -18,10 +18,10 @@ import Reviews from "./jobdetails/reviews/Reviews";
 import Highlights from "./jobdetails/highlights/Highlights";
 
 export {
-  ScreenHeaderBtn,
   Logo,
   ScreenContainer,
   SearchResultCard,
+  Button,
   Welcome,
   NearbyJobs,
   PopularJobs,

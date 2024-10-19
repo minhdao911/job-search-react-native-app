@@ -5,7 +5,13 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow JobS to use your location."
+        }
+      ]
     ],
     "name": "job-search-app",
     "slug": "job-search-app"

@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { JobSearchResponseData } from "@/types/jsearch";
 import { COLORS } from "@/constants";
 import Logo from "../../logo/Logo";
-import { getLocation } from "@/utils";
+import { getLocationText } from "@/utils";
 
 import styles from "./popularjobcard.style";
 
@@ -60,7 +60,7 @@ const PopularJobCard = ({ item, onPress }: PopularJobCardProps) => {
           >
             {item.job_publisher} -
           </Text>
-          <Text style={styles.location}>{getLocation(item)}</Text>
+          <Text style={styles.location}>{getLocationText(item)}</Text>
         </View>
       </View>
     </TouchableOpacity>

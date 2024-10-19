@@ -11,7 +11,7 @@ import Footer from "@/components/jobdetails/footer/Footer";
 import { COLORS } from "@/constants";
 import useFetch from "@/hooks/useFetch";
 import { Endpoint, JobDetailsResponseData } from "@/types/jsearch";
-import { getLocation } from "@/utils";
+import { getLocationText } from "@/utils";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
@@ -80,7 +80,7 @@ const JobDetails = () => {
               name={jobData[0].employer_name}
               logo={jobData[0].employer_logo}
               jobTitle={jobData[0].job_title}
-              location={getLocation(jobData[0])}
+              location={getLocationText(jobData[0])}
             />
             <JobTabs
               tabs={Object.values(Tab)}

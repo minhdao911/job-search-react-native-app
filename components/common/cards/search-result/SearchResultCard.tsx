@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import Logo from "../../logo/Logo";
 import { JobSearchResponseData } from "@/types/jsearch";
-import { getLocation } from "@/utils";
+import { getLocationText } from "@/utils";
 import { COLORS } from "@/constants";
 import Button from "../../button/Button";
 
@@ -19,7 +19,7 @@ const SearchResultCard = ({ item, onPress }: SearchResultCardProps) => {
       <View style={styles.textContainer}>
         <Text style={styles.companyName}>{item.employer_name}</Text>
         <Text style={styles.jobName}>{item.job_title}</Text>
-        <Text style={styles.location}>{getLocation(item)}</Text>
+        <Text style={styles.location}>{getLocationText(item)}</Text>
       </View>
       <Button
         variant="icon"

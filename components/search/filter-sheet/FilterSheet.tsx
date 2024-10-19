@@ -2,8 +2,8 @@ import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import { forwardRef, useCallback, useMemo, useState } from "react";
-import { ScrollView, Text, TextInput, View } from "react-native";
+import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
+import { Alert, ScrollView, Text, TextInput, View } from "react-native";
 import Button from "@/components/common/button/Button";
 import {
   DatePosted,
@@ -21,9 +21,11 @@ import {
   getEmploymentTypeText,
   getJobRequirementText,
 } from "@/utils";
+import * as Location from "expo-location";
 
 import styles from "./filtersheet.style";
 import MultiSelect from "@/components/common/multiselect/MultiSelect";
+import { getLocation } from "@/utils/location";
 
 const employmentTypes = Object.values(EmploymentType).map((value) => ({
   name: getEmploymentTypeText(value),
@@ -52,9 +54,17 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
 
     const [remoteChecked, setRemoteChecked] = useState(false);
     const [jobTypes, setJobTypes] = useState<EmploymentType[]>([]);
-    const [location, setLocation] = useState<string>();
     const [expLevels, setExpLevels] = useState<JobRequirement[]>([]);
     const [datePosted, setDatePosted] = useState<DatePosted>();
+    const [locationInput, setLocationInput] = useState<string>();
+    const [locationError, setLocationError] = useState<string>();
+    const [isLocationLoading, setIsLocationLoading] = useState(false);
+
+    useEffect(() => {
+      if (locationError) {
+        Alert.alert("Cannot get location", locationError);
+      }
+    }, [locationError]);
 
     const renderBackdrop = useCallback(
       (props: any) => (
@@ -66,20 +76,36 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
       ),
       []
     );
-
     const closeSheet = () => (ref as any).current?.close();
+
+    const handleGetLocation = async () => {
+      setIsLocationLoading(true);
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setLocationError("Permission to access location was denied");
+        return;
+      }
+
+      const location = await Location.getCurrentPositionAsync({});
+      const data = await getLocation(
+        location.coords.latitude,
+        location.coords.longitude
+      );
+      setLocationInput(data);
+      setIsLocationLoading(false);
+    };
 
     const handleReset = () => {
       setJobTypes([]);
       setExpLevels([]);
-      setLocation("");
+      setLocationInput("");
       setDatePosted(undefined);
       setRemoteChecked(false);
     };
 
     const handleSubmit = () => {
       const params = {
-        query: location,
+        query: locationInput,
         employment_types: jobTypes.length > 0 ? jobTypes.join(",") : undefined,
         job_requirements:
           expLevels.length > 0 ? expLevels.join(",") : undefined,
@@ -141,15 +167,18 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
                   />
                   <TextInput
                     style={styles.input}
-                    value={location}
+                    value={locationInput}
                     placeholder="Anywhere"
-                    onChangeText={setLocation}
+                    onChangeText={setLocationInput}
+                    editable={!isLocationLoading}
                   />
                 </View>
                 <MaterialIcons
                   name="my-location"
                   size={18}
                   color={COLORS.primary}
+                  onPress={handleGetLocation}
+                  disabled={isLocationLoading}
                 />
               </View>
             </View>

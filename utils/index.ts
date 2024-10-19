@@ -44,7 +44,7 @@ export const getDatPostedText = (type: DatePosted) => {
   }
 };
 
-export const getLocation = (data: Partial<JobSearchResponseData>) => {
+export const getLocationText = (data: Partial<JobSearchResponseData>) => {
   const { job_city, job_country } = data;
   return `${job_city ? job_city + ", " : ""}${job_country}`;
 };

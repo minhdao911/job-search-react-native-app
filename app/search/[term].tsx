@@ -117,7 +117,9 @@ const Search = () => {
           {isLoading ? (
             <ActivityIndicator color={COLORS.primary} />
           ) : error && jobData.length === 0 ? (
-            <Text style={commonStyles.infoText}>Something went wrong</Text>
+            <Text style={[commonStyles.infoText, { padding: 0 }]}>
+              Something went wrong
+            </Text>
           ) : (
             <></>
           )}

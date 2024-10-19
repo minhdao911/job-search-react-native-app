@@ -16,7 +16,6 @@ const tabs = Object.values(EmploymentType).map((type) => ({
 const Welcome = () => {
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState<EmploymentType | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>();
 
   return (
@@ -40,7 +39,10 @@ const Welcome = () => {
           icon="search"
           iconSize={30}
           iconColor={COLORS.white}
-          onPress={() => router.push(`/search/${searchTerm}`)}
+          onPress={() => {
+            if (!searchTerm) return;
+            router.push(`/search/${searchTerm}`);
+          }}
         />
       </View>
     </View>

@@ -48,3 +48,6 @@ export const getLocationText = (data: Partial<JobSearchResponseData>) => {
   const { job_city, job_country } = data;
   return `${job_city ? job_city + ", " : ""}${job_country}`;
 };
+
+export const emailRegex =
+  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

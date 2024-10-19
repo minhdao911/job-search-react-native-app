@@ -18,6 +18,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: SIZES.medium,
     backgroundColor: "transparent",
   },
+  error: {
+    borderColor: COLORS.red,
+    borderWidth: 1,
+  },
+  errorText: {
+    fontFamily: FONT.regular,
+    fontSize: SIZES.small,
+    color: COLORS.red,
+    marginTop: 5,
+  },
 });
 
 export default styles;

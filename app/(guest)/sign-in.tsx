@@ -1,10 +1,51 @@
-import { Button, Input, ScreenContainer } from "@/components";
+import { Button, ControlledInput, ScreenContainer } from "@/components";
 import { COLORS, FONT, icons, SIZES } from "@/constants";
+import { auth } from "@/lib/firebase/config";
+import { useAuth } from "@/providers/AuthProvider";
+import { emailRegex } from "@/utils";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { Alert, StyleSheet, Text, View } from "react-native";
+
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 const SignIn = () => {
   const router = useRouter();
+  const { signIn } = useAuth();
+  const { ...methods } = useForm<Inputs>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async ({ email, password }: Inputs) => {
+    setIsLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(
+        auth,
+        email.toLowerCase(),
+        password
+      );
+      const idToken = await response.user.getIdToken();
+      await signIn(idToken, response.user.uid);
+      setIsLoading(false);
+      router.replace("/");
+    } catch (err) {
+      Alert.alert(
+        "Authentication Failed",
+        "Could not log you in. Please check your credentials or try again later!"
+      );
+      setIsLoading(false);
+    }
+  };
 
   return (
     <ScreenContainer>
@@ -16,8 +57,27 @@ const SignIn = () => {
           </Text>
         </View>
         <View style={styles.formContainer}>
-          <Input placeholder="Email" />
-          <Input placeholder="Password" />
+          <FormProvider {...methods}>
+            <ControlledInput
+              name="email"
+              placeholder="Email"
+              keyboardType="email-address"
+              rules={{
+                required: "Email is required",
+                pattern: {
+                  value: emailRegex,
+                  message: "Please enter a valid email",
+                },
+              }}
+            />
+            <ControlledInput
+              name="password"
+              placeholder="Password"
+              keyboardType="email-address"
+              secureTextEntry
+              rules={{ required: "Password is required" }}
+            />
+          </FormProvider>
           <Button
             variant="ghost"
             text="Forgot Password"
@@ -26,7 +86,11 @@ const SignIn = () => {
             }}
           />
           <View style={styles.btnContainer}>
-            <Button text="Sign In" />
+            <Button
+              text="Sign In"
+              isLoading={isLoading}
+              onPress={methods.handleSubmit(onSubmit)}
+            />
             <Button
               variant="secondary"
               text="Sign in with Google"

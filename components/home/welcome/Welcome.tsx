@@ -5,7 +5,7 @@ import { COLORS } from "@/constants";
 import { EmploymentType } from "@/types/jsearch";
 import { getEmploymentTypeText } from "@/utils";
 import Button from "@/components/common/button/Button";
-import Input from "@/components/common/input/Input";
+import { Input } from "@/components/common/input/Input";
 
 import styles from "./welcome.style";
 

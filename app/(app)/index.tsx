@@ -10,8 +10,11 @@ import {
 } from "@/components";
 
 import styles from "@/styles/common";
+import { useAuth } from "@/providers/AuthProvider";
 
 const Home = () => {
+  const { signOut } = useAuth();
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
@@ -23,12 +26,14 @@ const Home = () => {
 
   return (
     <ScreenContainer>
-      {/* <Stack.Screen
+      <Stack.Screen
         options={{
           headerLeft: () => <Button variant="icon" icon="menu" />,
-          headerRight: () => <Button variant="icon" icon="people" />,
+          headerRight: () => (
+            <Button variant="icon" icon="person" onPress={signOut} />
+          ),
         }}
-      /> */}
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={

@@ -1,5 +1,7 @@
+import React from "react";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import {
+  ActivityIndicator,
   Image,
   ImageSourcePropType,
   ImageStyle,
@@ -9,9 +11,9 @@ import {
   ViewStyle,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { COLORS } from "@/constants";
 
 import styles from "./button.style";
-import React from "react";
 
 interface Button {
   variant?: "primary" | "secondary" | "ghost" | "outline" | "icon";
@@ -25,6 +27,7 @@ interface Button {
   imgStyle?: StyleProp<ImageStyle>;
   activeOpacity?: number;
   layout?: string[];
+  isLoading?: boolean;
   onPress?: () => void;
 }
 
@@ -40,35 +43,47 @@ const Button = ({
   imgStyle,
   activeOpacity,
   layout = ["text", "icon"],
+  isLoading,
   onPress,
 }: Button) => {
   return (
     <TouchableOpacity
       style={[styles.btnContainer, styles[`${variant}Container`], style]}
       activeOpacity={activeOpacity}
+      disabled={isLoading}
       onPress={onPress}
     >
-      {layout.map((value, index) => (
-        <React.Fragment key={index}>
-          {value === "text"
-            ? text && (
-                <Text
-                  style={[styles.btnText, styles[`${variant}Text`], textStyle]}
-                >
-                  {text}
-                </Text>
-              )
-            : value === "icon"
-            ? icon && (
-                <Ionicons
-                  name={icon as any}
-                  size={iconSize}
-                  color={iconColor}
-                />
-              )
-            : image && <Image style={[styles.img, imgStyle]} source={image} />}
-        </React.Fragment>
-      ))}
+      {isLoading ? (
+        <ActivityIndicator color={COLORS.lightWhite} />
+      ) : (
+        layout.map((value, index) => (
+          <React.Fragment key={index}>
+            {value === "text"
+              ? text && (
+                  <Text
+                    style={[
+                      styles.btnText,
+                      styles[`${variant}Text`],
+                      textStyle,
+                    ]}
+                  >
+                    {text}
+                  </Text>
+                )
+              : value === "icon"
+              ? icon && (
+                  <Ionicons
+                    name={icon as any}
+                    size={iconSize}
+                    color={iconColor}
+                  />
+                )
+              : image && (
+                  <Image style={[styles.img, imgStyle]} source={image} />
+                )}
+          </React.Fragment>
+        ))
+      )}
     </TouchableOpacity>
   );
 };

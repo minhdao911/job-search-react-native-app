@@ -8,7 +8,7 @@ import styles from "./company.style";
 
 interface CompanyProps {
   name: string;
-  logo: string | null;
+  logo?: string | null;
   jobTitle: string;
   location: string;
 }

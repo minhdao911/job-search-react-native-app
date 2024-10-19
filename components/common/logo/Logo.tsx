@@ -5,13 +5,13 @@ import { icons } from "@/constants";
 import styles from "./logo.style";
 
 interface LogoProps {
-  src: string | null;
+  src?: string | null;
   size?: "small" | "default" | "large";
   style?: StyleProp<ViewStyle>;
 }
 
 const Logo = ({ src, style, size = "default" }: LogoProps) => {
-  const [logo, setLogo] = useState<string | null>(src);
+  const [logo, setLogo] = useState(src);
 
   return (
     <View style={[styles.logoContainer, styles[`${size}Container`], style]}>

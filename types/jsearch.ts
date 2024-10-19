@@ -74,7 +74,7 @@ export type JobDetailsQuery = z.infer<typeof JobDetailsQuerySchema>;
 export type JobQuery = JobSearchQuery | JobSearchFiltersQuery | JobDetailsQuery;
 
 const JobRequiredExperienceSchema = z.object({
-  no_experience_required: z.string(),
+  no_experience_required: z.coerce.boolean(),
   required_experience_in_months: z.coerce.number(),
   experience_mentioned: z.coerce.boolean(),
   experience_preferred: z.coerce.boolean(),
@@ -105,15 +105,15 @@ const JobApplyOptionSchema = z.object({
 });
 
 const JobEstimatedSalarySchema = z.object({
-  location: z.string().nullable(),
-  job_title: z.string().nullable(),
-  publisher_name: z.string().nullable(),
-  publisher_link: z.string().nullable(),
-  min_salary: z.number().nullable(),
-  max_salary: z.number().nullable(),
-  median_salary: z.number().nullable(),
-  salary_period: z.nativeEnum(SalaryPeriod).nullable(),
-  salary_currency: z.string().nullable(),
+  location: z.string().nullish(),
+  job_title: z.string().nullish(),
+  publisher_name: z.string().nullish(),
+  publisher_link: z.string().nullish(),
+  min_salary: z.number().nullish(),
+  max_salary: z.number().nullish(),
+  median_salary: z.number().nullish(),
+  salary_period: z.nativeEnum(SalaryPeriod).nullish(),
+  salary_currency: z.string().nullish(),
 });
 
 const JobEmployerReviewSchema = z.object({
@@ -136,10 +136,10 @@ const JobFilterPropsSchema = z.object({
 const JobSearchResponseDataSchema = z.object({
   job_id: z.string(),
   employer_name: z.string(),
-  employer_logo: z.string().nullable(),
-  employer_website: z.string().nullable(),
-  employer_company_type: z.string().nullable(),
-  employer_linkedin: z.string().nullable(),
+  employer_logo: z.string().nullish(),
+  employer_website: z.string().nullish(),
+  employer_company_type: z.string().nullish(),
+  employer_linkedin: z.string().nullish(),
   job_employment_type: z.nativeEnum(EmploymentType),
   job_title: z.string(),
   job_publisher: z.string(),
@@ -150,23 +150,23 @@ const JobSearchResponseDataSchema = z.object({
   job_is_remote: z.boolean(),
   job_posted_at_timestamp: z.number(),
   job_posted_at_datetime_utc: z.string(),
-  job_city: z.string().nullable(),
-  job_state: z.string().nullable(),
+  job_city: z.string().nullish(),
+  job_state: z.string().nullish(),
   job_country: z.string(),
   job_latitude: z.number(),
   job_longitude: z.number(),
   job_google_link: z.string(),
-  job_offer_expiration_datetime_utc: z.string().nullable(),
-  job_offer_expiration_timestamp: z.number().nullable(),
+  job_offer_expiration_datetime_utc: z.string().nullish(),
+  job_offer_expiration_timestamp: z.number().nullish(),
   job_required_experience: JobRequiredExperienceSchema.optional(),
-  job_required_skills: z.array(z.string()).nullable(),
+  job_required_skills: z.array(z.string()).nullish(),
   job_required_education: JobRequiredEducationSchema.optional(),
-  job_min_salary: z.number().nullable(),
-  job_max_salary: z.number().nullable(),
-  job_salary_currency: z.string().nullable(),
-  job_salary_period: z.nativeEnum(SalaryPeriod).nullable(),
+  job_min_salary: z.number().nullish(),
+  job_max_salary: z.number().nullish(),
+  job_salary_currency: z.string().nullish(),
+  job_salary_period: z.nativeEnum(SalaryPeriod).nullish(),
   job_highlights: JobHighlightsSchema.optional(),
-  job_job_title: z.string().nullable(),
+  job_job_title: z.string().nullish(),
   job_posting_language: z.string(),
 });
 export type JobSearchResponseData = z.infer<typeof JobSearchResponseDataSchema>;

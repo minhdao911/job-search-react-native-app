@@ -6,6 +6,7 @@ import { EmploymentType } from "@/types/jsearch";
 import { getEmploymentTypeText } from "@/utils";
 import Button from "@/components/common/button/Button";
 import { Input } from "@/components/common/input/Input";
+import { useAuth } from "@/providers/AuthProvider";
 
 import styles from "./welcome.style";
 
@@ -16,13 +17,14 @@ const tabs = Object.values(EmploymentType).map((type) => ({
 
 const Welcome = () => {
   const router = useRouter();
+  const { user } = useAuth();
 
   const [searchTerm, setSearchTerm] = useState<string>();
 
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.userName}>Hello John Doe</Text>
+        <Text style={styles.userName}>Hello {user?.name}</Text>
         <Text style={styles.welcomeMessage}>Find your perfect job</Text>
       </View>
       <View style={styles.searchContainer}>

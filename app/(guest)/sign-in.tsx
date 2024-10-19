@@ -1,10 +1,10 @@
 import { Button, ControlledInput, ScreenContainer } from "@/components";
+import Checkbox from "@/components/common/checkbox/Checkbox";
 import { COLORS, FONT, icons, SIZES } from "@/constants";
-import { auth } from "@/lib/firebase/config";
+import { logInWithEmailAndPassword, persistAuthState } from "@/lib/auth";
 import { useAuth } from "@/providers/AuthProvider";
 import { emailRegex } from "@/utils";
 import { useRouter } from "expo-router";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Alert, StyleSheet, Text, View } from "react-native";
@@ -25,23 +25,19 @@ const SignIn = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [rememberChecked, setRememberChecked] = useState(true);
 
   const onSubmit = async ({ email, password }: Inputs) => {
     setIsLoading(true);
     try {
-      const response = await signInWithEmailAndPassword(
-        auth,
-        email.toLowerCase(),
-        password
-      );
-      const idToken = await response.user.getIdToken();
-      await signIn(idToken, response.user.uid);
+      const { token, uid } = await logInWithEmailAndPassword(email, password);
+      await signIn(token, uid);
       setIsLoading(false);
       router.replace("/");
     } catch (err) {
       Alert.alert(
         "Authentication Failed",
-        "Could not log you in. Please check your credentials or try again later!"
+        "Could not log you in. Please check your credentials or try again later"
       );
       setIsLoading(false);
     }
@@ -78,13 +74,21 @@ const SignIn = () => {
               rules={{ required: "Password is required" }}
             />
           </FormProvider>
-          <Button
-            variant="ghost"
-            text="Forgot Password"
-            style={{
-              alignSelf: "flex-end",
-            }}
-          />
+          <View style={styles.checkboxContainer}>
+            <Checkbox
+              label="Remember me"
+              value={rememberChecked}
+              onValueChange={async (value) => {
+                if (value) {
+                  await persistAuthState("local");
+                } else {
+                  await persistAuthState("none");
+                }
+                setRememberChecked(value);
+              }}
+            />
+            <Button variant="ghost" text="Forgot Password" />
+          </View>
           <View style={styles.btnContainer}>
             <Button
               text="Sign In"
@@ -138,6 +142,11 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     gap: 15,
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   btnContainer: {
     marginTop: 15,

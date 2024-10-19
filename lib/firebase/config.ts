@@ -5,8 +5,9 @@ import {
   FIREBASE_PROJECT_ID,
 } from "@env";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, getReactNativePersistence } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -17,6 +18,7 @@ const firebaseConfig = {
   appId: FIREBASE_APP_ID,
   measurementId: FIREBASE_MEASUREMENT_ID,
   databaseURL: `https://${FIREBASE_PROJECT_ID}-default-rtdb.europe-west1.firebasedatabase.app`,
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 };
 
 const app = initializeApp(firebaseConfig);

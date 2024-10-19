@@ -9,7 +9,13 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow JobS to use your location."
+          "locationAlwaysAndWhenInUsePermission": "Allow CareerDash to use your location."
+        }
+      ],
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": "Allow CareerDash to access your Face ID biometric data."
         }
       ]
     ],

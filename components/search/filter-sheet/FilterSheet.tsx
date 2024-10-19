@@ -14,7 +14,6 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Dropdown from "@/components/common/dropdown/Dropdown";
-import Checkbox from "expo-checkbox";
 import { COLORS } from "@/constants";
 import {
   getDatPostedText,
@@ -26,6 +25,7 @@ import * as Location from "expo-location";
 import styles from "./filtersheet.style";
 import MultiSelect from "@/components/common/multiselect/MultiSelect";
 import { getLocation } from "@/utils/location";
+import Checkbox from "@/components/common/checkbox/Checkbox";
 
 const employmentTypes = Object.values(EmploymentType).map((value) => ({
   name: getEmploymentTypeText(value),
@@ -146,15 +146,11 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
                 selectedItems={jobTypes}
                 setSelectedItems={setJobTypes}
               />
-              <View style={styles.checkboxContainer}>
-                <Checkbox
-                  style={styles.checkbox}
-                  value={remoteChecked}
-                  onValueChange={setRemoteChecked}
-                  color={remoteChecked ? COLORS.tertiary : undefined}
-                />
-                <Text style={styles.checkboxText}>Remote only</Text>
-              </View>
+              <Checkbox
+                label="Remote only"
+                value={remoteChecked}
+                onValueChange={setRemoteChecked}
+              />
             </View>
             <View style={styles.filterItemContainer}>
               <Text style={styles.filterItemTitle}>Location</Text>

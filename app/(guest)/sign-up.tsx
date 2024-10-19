@@ -52,7 +52,7 @@ const SignUp = () => {
     } catch (err: any) {
       console.log(err);
       let errorMessage =
-        "Could not create account. Please check your credentials or try again later!";
+        "Could not create account. Please check your credentials or try again later";
       if (err.code === "auth/email-already-in-use") {
         errorMessage = "Email already in use. Please sign in instead";
       }

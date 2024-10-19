@@ -1,13 +1,15 @@
 import { readUserData, writeUserData } from "@/lib/db";
 import { User } from "@/lib/db/schema";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { signOut as FBSignOut } from "firebase/auth";
 import { auth } from "@/lib/firebase/config";
+import { useStorageState } from "@/hooks/useStorageState";
 
 interface Auth {
   token: string | null;
-  isLoggedIn: boolean;
   user: User | null;
+  isLoggedIn: boolean;
+  isLoading: boolean;
   signIn: (token: string, uid: string) => Promise<void>;
   signUp: (token: string, userData: User) => Promise<void>;
   signOut: () => Promise<void>;
@@ -15,15 +17,16 @@ interface Auth {
 
 const AuthContext = React.createContext<Auth>({
   token: null,
-  isLoggedIn: false,
   user: null,
+  isLoggedIn: false,
+  isLoading: false,
   signIn: async () => {},
   signUp: async () => {},
   signOut: async () => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [token, setToken] = useState<string | null>(null);
+  const [[isLoading, token], setToken] = useStorageState("token");
   const [user, setUser] = useState<User | null>(null);
 
   const signIn = async (token: string, uid: string) => {
@@ -46,8 +49,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const value = {
     token,
-    isLoggedIn: !!token,
     user,
+    isLoggedIn: !!token,
+    isLoading,
     signIn,
     signUp,
     signOut,
@@ -56,6 +60,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => React.useContext(AuthContext);
+export const useAuth = () => {
+  const value = useContext(AuthContext);
+  if (!value) {
+    throw new Error("useSession must be wrapped in a <AuthProvider />");
+  }
+  return value;
+};
 
 export default AuthContext;

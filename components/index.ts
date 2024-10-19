@@ -3,6 +3,7 @@ import Logo from "./common/logo/Logo";
 import ScreenContainer from "./common/screen-container/ScreenContainer";
 import SearchResultCard from "./common/cards/search-result/SearchResultCard";
 import Button from "./common/button/Button";
+import Input from "./common/input/Input";
 
 // home screen
 import Welcome from "./home/welcome/Welcome";
@@ -22,6 +23,7 @@ export {
   ScreenContainer,
   SearchResultCard,
   Button,
+  Input,
   Welcome,
   NearbyJobs,
   PopularJobs,

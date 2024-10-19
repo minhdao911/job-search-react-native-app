@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { AuthProvider } from "@/providers/AuthProvider";
 
 SplashScreen.preventAutoHideAsync();
-
-const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -27,10 +24,8 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Stack />
-      </GestureHandlerRootView>
-    </QueryClientProvider>
+    <AuthProvider>
+      <Slot />
+    </AuthProvider>
   );
 }

@@ -10,6 +10,7 @@ import twitch from "@/assets/icons/twitch.png";
 import twitter from "@/assets/icons/twitter.png";
 import wattpad from "@/assets/icons/wattpad.png";
 import logoPlaceholder from "@/assets/icons/logo-placeholder.png";
+import welcome from "@/assets/icons/welcome.png";
 
 export default {
   amazon,
@@ -24,4 +25,5 @@ export default {
   twitter,
   wattpad,
   logoPlaceholder,
+  welcome,
 };

@@ -67,17 +67,13 @@ const Search = () => {
     <ScreenContainer>
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: COLORS.lightWhite },
-          headerShadowVisible: false,
-          headerBackVisible: false,
           headerLeft: () => (
             <Button
               variant="icon"
-              icon="chevron-back"
+              icon="arrow-back"
               onPress={() => router.back()}
             />
           ),
-          headerTitle: "",
         }}
       />
       <View style={commonStyles.screenContainer}>

@@ -2,10 +2,11 @@ import {
   inMemoryPersistence,
   setPersistence,
   signInWithEmailAndPassword,
-  getReactNativePersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
-import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import { FIREBASE_PROJECT_ID, FIREBASE_REGION } from "@env";
 
 export const logInWithEmailAndPassword = async (
   email: string,
@@ -21,11 +22,23 @@ export const logInWithEmailAndPassword = async (
 
 export const persistAuthState = async (type: "local" | "none") => {
   if (type === "local") {
-    await setPersistence(
-      auth,
-      getReactNativePersistence(ReactNativeAsyncStorage)
-    );
+    await setPersistence(auth, browserLocalPersistence);
   } else {
     await setPersistence(auth, inMemoryPersistence);
+  }
+};
+
+export const verifyIdToken = async (token: string) => {
+  try {
+    const response = await axios.post(
+      `https://${FIREBASE_REGION}-${FIREBASE_PROJECT_ID}.cloudfunctions.net/verifyIdToken`,
+      {
+        idToken: token,
+      }
+    );
+    return response.data.uid;
+  } catch (err) {
+    console.log(err);
+    return null;
   }
 };

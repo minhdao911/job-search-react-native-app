@@ -30,8 +30,8 @@ const SignIn = () => {
   const onSubmit = async ({ email, password }: Inputs) => {
     setIsLoading(true);
     try {
-      const { token, uid } = await logInWithEmailAndPassword(email, password);
-      await signIn(token, uid);
+      const { token } = await logInWithEmailAndPassword(email, password);
+      await signIn(token);
       setIsLoading(false);
       router.replace("/");
     } catch (err) {

@@ -3,6 +3,7 @@ import {
   FIREBASE_APP_ID,
   FIREBASE_MEASUREMENT_ID,
   FIREBASE_PROJECT_ID,
+  FIREBASE_REGION,
 } from "@env";
 import { initializeApp } from "firebase/app";
 import { getAuth, getReactNativePersistence } from "firebase/auth";
@@ -17,7 +18,7 @@ const firebaseConfig = {
   messagingSenderId: FIREBASE_MEASUREMENT_ID,
   appId: FIREBASE_APP_ID,
   measurementId: FIREBASE_MEASUREMENT_ID,
-  databaseURL: `https://${FIREBASE_PROJECT_ID}-default-rtdb.europe-west1.firebasedatabase.app`,
+  databaseURL: `https://${FIREBASE_PROJECT_ID}-default-rtdb.${FIREBASE_REGION}.firebasedatabase.app`,
   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 };
 

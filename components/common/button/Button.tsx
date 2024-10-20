@@ -1,5 +1,4 @@
 import React from "react";
-import { TouchableOpacity } from "@gorhom/bottom-sheet";
 import {
   ActivityIndicator,
   Image,
@@ -8,6 +7,7 @@ import {
   StyleProp,
   Text,
   TextStyle,
+  TouchableOpacity,
   ViewStyle,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";

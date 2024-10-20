@@ -10,18 +10,22 @@ const styles = StyleSheet.create({
     right: 0,
     padding: SIZES.large,
     backgroundColor: "#FFF",
-    justifyContent: "space-between",
-    alignItems: "center",
     flexDirection: "row",
+    alignItems: "center",
+    gap: SIZES.medium,
+  },
+  contentContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: SIZES.medium,
   },
   likeBtn: {
     width: 55,
     height: 55,
   },
   applyBtn: {
-    flex: 1,
+    flexGrow: 1,
     height: "100%",
-    marginLeft: SIZES.medium,
   },
 });
 

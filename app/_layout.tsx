@@ -3,6 +3,7 @@ import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,8 +25,10 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <AuthProvider>
-      <Slot />
-    </AuthProvider>
+    <GestureHandlerRootView>
+      <AuthProvider>
+        <Slot />
+      </AuthProvider>
+    </GestureHandlerRootView>
   );
 }

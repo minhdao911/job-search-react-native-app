@@ -3,7 +3,7 @@ import BottomSheet, {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
-import { Alert, ScrollView, Text, TextInput, View } from "react-native";
+import { Alert, Text, TextInput, View } from "react-native";
 import Button from "@/components/common/button/Button";
 import {
   DatePosted,
@@ -26,6 +26,7 @@ import styles from "./filtersheet.style";
 import MultiSelect from "@/components/common/multiselect/MultiSelect";
 import { getLocation } from "@/utils/location";
 import Checkbox from "@/components/common/checkbox/Checkbox";
+import { ScrollView } from "react-native-gesture-handler";
 
 const employmentTypes = Object.values(EmploymentType).map((value) => ({
   name: getEmploymentTypeText(value),
@@ -50,7 +51,7 @@ interface FilterSheetProps {
 
 const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
   ({ onSubmit }, ref) => {
-    const snapPoints = useMemo(() => ["70%"], []);
+    const snapPoints = useMemo(() => ["75%"], []);
 
     const [remoteChecked, setRemoteChecked] = useState(false);
     const [jobTypes, setJobTypes] = useState<EmploymentType[]>([]);
@@ -137,6 +138,7 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
           <ScrollView
             contentContainerStyle={styles.contentWrapper}
             showsVerticalScrollIndicator={false}
+            nestedScrollEnabled={true}
           >
             <View style={styles.filterItemContainer}>
               <Text style={styles.filterItemTitle}>Job Type</Text>
@@ -155,21 +157,20 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
             <View style={styles.filterItemContainer}>
               <Text style={styles.filterItemTitle}>Location</Text>
               <View style={styles.inputContainer}>
-                <View style={styles.inputWrapper}>
-                  <Ionicons
-                    name="location-outline"
-                    size={18}
-                    color={COLORS.primary}
-                  />
-                  <TextInput
-                    style={styles.input}
-                    value={locationInput}
-                    placeholder="Anywhere"
-                    onChangeText={setLocationInput}
-                    editable={!isLocationLoading}
-                  />
-                </View>
+                <Ionicons
+                  name="location-outline"
+                  size={18}
+                  color={COLORS.primary}
+                />
+                <TextInput
+                  style={styles.input}
+                  value={locationInput}
+                  placeholder="Anywhere"
+                  onChangeText={setLocationInput}
+                  editable={!isLocationLoading}
+                />
                 <MaterialIcons
+                  style={styles.locationIcon}
                   name="my-location"
                   size={18}
                   color={COLORS.primary}
@@ -198,11 +199,9 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
               />
             </View>
           </ScrollView>
-          <Button
-            text="Show Result"
-            style={styles.submitBtn}
-            onPress={handleSubmit}
-          />
+          <View style={styles.submitBtnContainer}>
+            <Button text="Show Result" onPress={handleSubmit} />
+          </View>
         </BottomSheetView>
       </BottomSheet>
     );

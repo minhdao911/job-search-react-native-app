@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     padding: SIZES.large,
   },
   contentWrapper: {
+    flexGrow: 1,
     gap: 20,
     paddingBottom: 120,
   },
@@ -57,25 +58,29 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: 40,
-    paddingHorizontal: 10,
-  },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 3,
+    paddingLeft: 10,
+    paddingRight: 40,
   },
   input: {
+    flexGrow: 1,
     fontFamily: FONT.regular,
     height: "100%",
     paddingHorizontal: SIZES.medium,
     backgroundColor: "transparent",
   },
-  submitBtn: {
+  locationIcon: {
     position: "absolute",
-    width: "100%",
-    left: SIZES.large,
-    bottom: 40,
+    right: 10,
+  },
+  submitBtnContainer: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
     marginTop: 20,
+    paddingHorizontal: SIZES.large,
+    paddingBottom: 40,
+    backgroundColor: COLORS.lightWhite,
   },
 });
 

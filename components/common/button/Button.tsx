@@ -28,6 +28,7 @@ interface Button {
   activeOpacity?: number;
   layout?: string[];
   isLoading?: boolean;
+  disabled?: boolean;
   onPress?: () => void;
 }
 
@@ -44,13 +45,19 @@ const Button = ({
   activeOpacity,
   layout = ["text", "icon"],
   isLoading,
+  disabled,
   onPress,
 }: Button) => {
   return (
     <TouchableOpacity
-      style={[styles.btnContainer, styles[`${variant}Container`], style]}
+      style={[
+        styles.btnContainer,
+        styles[`${variant}Container`],
+        disabled && styles.disabled,
+        style,
+      ]}
       activeOpacity={activeOpacity}
-      disabled={isLoading}
+      disabled={disabled || isLoading}
       onPress={onPress}
     >
       {isLoading ? (

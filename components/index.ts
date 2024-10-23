@@ -6,6 +6,12 @@ import { Input, ControlledInput } from "./common/input/Input";
 import Button from "./common/button/Button";
 import GoogleSigninButton from "./common/button/GoogleSigninButton";
 
+// onboarding screen
+import ListItem from "./onboarding/list-item/ListItem";
+import ActionButtons from "./onboarding/action-buttons/ActionButtons";
+import JobTitles from "./onboarding/job-titles/JobTitles";
+import Location from "./onboarding/location/Location";
+
 // home screen
 import Welcome from "./home/welcome/Welcome";
 import NearbyJobs from "./home/nearby/NearbyJobs";
@@ -20,6 +26,7 @@ import Reviews from "./jobdetails/reviews/Reviews";
 import Highlights from "./jobdetails/highlights/Highlights";
 
 export {
+  // common
   Logo,
   ScreenContainer,
   SearchResultCard,
@@ -27,9 +34,16 @@ export {
   GoogleSigninButton,
   Input,
   ControlledInput,
+  // onboarding
+  ListItem,
+  ActionButtons,
+  JobTitles,
+  Location,
+  // home
   Welcome,
   NearbyJobs,
   PopularJobs,
+  // job details
   Company,
   JobTabs,
   JobAbout,

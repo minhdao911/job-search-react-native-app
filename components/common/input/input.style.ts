@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: "100%",
+    flexGrow: 1,
     backgroundColor: COLORS.white,
     marginRight: SIZES.small,
     justifyContent: "center",

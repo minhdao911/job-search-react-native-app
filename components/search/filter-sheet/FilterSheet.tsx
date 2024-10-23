@@ -24,7 +24,7 @@ import * as Location from "expo-location";
 
 import styles from "./filtersheet.style";
 import MultiSelect from "@/components/common/multiselect/MultiSelect";
-import { getLocation } from "@/utils/location";
+import { getLocationByLatLon } from "@/utils/location";
 import Checkbox from "@/components/common/checkbox/Checkbox";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -88,7 +88,7 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
       }
 
       const location = await Location.getCurrentPositionAsync({});
-      const data = await getLocation(
+      const data = await getLocationByLatLon(
         location.coords.latitude,
         location.coords.longitude
       );

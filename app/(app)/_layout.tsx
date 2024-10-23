@@ -8,7 +8,7 @@ import { Text } from "react-native";
 const queryClient = new QueryClient();
 
 const HomeLayout = () => {
-  const { isLoggedIn, isLoading } = useAuth();
+  const { isLoggedIn, user, isLoading } = useAuth();
 
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -16,6 +16,10 @@ const HomeLayout = () => {
 
   if (!isLoggedIn) {
     return <Redirect href="/welcome" />;
+  }
+
+  if (!user?.isOnboarded) {
+    return <Redirect href="/onboarding" />;
   }
 
   return (

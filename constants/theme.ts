@@ -28,17 +28,17 @@ const SIZES = {
 
 const SHADOWS = {
   small: {
-    shadowColor: "#000",
+    shadowColor: COLORS.gray2,
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 5,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
     elevation: 2,
   },
   medium: {
-    shadowColor: "#000",
+    shadowColor: COLORS.gray2,
     shadowOffset: {
       width: 0,
       height: 2,

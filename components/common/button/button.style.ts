@@ -59,6 +59,9 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
+  disabled: {
+    opacity: 0.7,
+  },
 });
 
 export default styles;

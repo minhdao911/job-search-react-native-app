@@ -1,3 +1,4 @@
+import { JobCategory } from "@/types/common";
 import {
   DatePosted,
   EmploymentType,
@@ -51,3 +52,34 @@ export const getLocationText = (data: Partial<JobSearchResponseData>) => {
 
 export const emailRegex =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+export const getJobTitles = (type: JobCategory) => {
+  switch (type) {
+    case JobCategory.IT:
+      return [
+        "Software engineer",
+        "Web developer",
+        "Mobile developer",
+        "Data analyst",
+      ];
+    case JobCategory.Business:
+      return ["Finance specialist", "Accountant", "Human resources specialist"];
+    case JobCategory.Healthcare:
+      return ["Nutritionist", "Psychologist", "Nurse practitioner"];
+    case JobCategory.Arts:
+      return ["Graphic designer", "Dancer", "Photographer"];
+    case JobCategory.Hospitality:
+      return ["Front desk receptionist", "Bartender", "Event planner", "Chef"];
+    case JobCategory.Education:
+      return [
+        "Tutor",
+        "High school teacher",
+        "Librarian",
+        "Elementary school teacher",
+      ];
+    case JobCategory.SalesAndMarketing:
+      return ["Social media specialist", "Sales engineer", "Market researcher"];
+    default:
+      return [];
+  }
+};

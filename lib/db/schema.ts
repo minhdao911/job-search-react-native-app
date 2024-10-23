@@ -2,11 +2,12 @@ import { JobDetailsResponseSchema } from "@/types/jsearch";
 import { z } from "zod";
 
 const UserSchema = z.object({
-  name: z.string().nullable(),
+  name: z.string().nullish(),
   email: z.string(),
   uid: z.string(),
   photoUrl: z.string().optional(),
-  preference: z.string().optional(),
+  isOnboarded: z.boolean(),
+  preferences: z.string().optional(),
   location: z.string().optional(),
 });
 export type User = z.infer<typeof UserSchema>;

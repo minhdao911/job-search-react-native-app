@@ -12,8 +12,9 @@ interface Auth {
   user: User | null;
   isLoggedIn: boolean;
   isLoading: boolean;
+  setUser: (user: User) => void;
   signIn: (token: string) => void;
-  signUp: (token: string, userData: User) => Promise<void>;
+  signUp: (token: string, userData: Partial<User>) => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -22,6 +23,7 @@ const AuthContext = React.createContext<Auth>({
   user: null,
   isLoggedIn: false,
   isLoading: false,
+  setUser: () => {},
   signIn: () => {},
   signUp: async () => {},
   signOut: async () => {},
@@ -49,8 +51,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setToken(token);
   };
 
-  const signUp = async (token: string, userData: User) => {
-    await writeUserData(userData);
+  const signUp = async (token: string, userData: Partial<User>) => {
+    await writeUserData({
+      uid: userData.uid!,
+      name: userData.name,
+      email: userData.email!,
+      isOnboarded: false,
+    });
     setToken(token);
   };
 
@@ -73,6 +80,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     user,
     isLoggedIn: !!token,
     isLoading,
+    setUser,
     signIn,
     signUp,
     signOut,

@@ -1,5 +1,10 @@
-import { Button, ControlledInput, ScreenContainer } from "@/components";
-import { COLORS, FONT, icons, SIZES } from "@/constants";
+import {
+  Button,
+  ControlledInput,
+  ScreenContainer,
+  GoogleSigninButton,
+} from "@/components";
+import { COLORS, FONT, SIZES } from "@/constants";
 import { auth } from "@/lib/firebase/config";
 import { useAuth } from "@/providers/AuthProvider";
 import { emailRegex } from "@/utils";
@@ -119,12 +124,7 @@ const SignUp = () => {
               isLoading={isLoading}
               onPress={methods.handleSubmit(onSubmit)}
             />
-            <Button
-              variant="secondary"
-              text="Sign up with Google"
-              image={icons.google}
-              layout={["image", "text"]}
-            />
+            <GoogleSigninButton label="Sign up with Google" />
           </View>
         </View>
         <View style={styles.footerContainer}>

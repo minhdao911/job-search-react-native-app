@@ -5,7 +5,6 @@ import {
   JobSearchFiltersResponseSchema,
   JobSearchResponseSchema,
 } from "@/types/jsearch";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { getOptions } from "@/utils/jsearch";
 import mockSearch from "@/data/mock-search";

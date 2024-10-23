@@ -6,7 +6,12 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 import axios from "axios";
-import { FIREBASE_PROJECT_ID, FIREBASE_REGION } from "@env";
+import {
+  FIREBASE_PROJECT_ID,
+  FIREBASE_REGION,
+  GOOGLE_SERVICES_CLIENT_ID,
+} from "@env";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 export const logInWithEmailAndPassword = async (
   email: string,
@@ -41,4 +46,10 @@ export const verifyIdToken = async (token: string) => {
     console.log(err);
     return null;
   }
+};
+
+export const configureGoogleSignin = () => {
+  GoogleSignin.configure({
+    webClientId: GOOGLE_SERVICES_CLIENT_ID,
+  });
 };

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { RefreshControl, ScrollView, View } from "react-native";
+import { Alert, RefreshControl, ScrollView, View } from "react-native";
 import { Stack } from "expo-router";
 import {
   NearbyJobs,
@@ -24,13 +24,24 @@ const Home = () => {
     }, 500);
   }, []);
 
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      Alert.alert(
+        "Unexpected error while signing out",
+        "Cannot sign out, please try again"
+      );
+    }
+  };
+
   return (
     <ScreenContainer>
       <Stack.Screen
         options={{
           headerLeft: () => <Button variant="icon" icon="menu" />,
           headerRight: () => (
-            <Button variant="icon" icon="person" onPress={signOut} />
+            <Button variant="icon" icon="person" onPress={handleSignOut} />
           ),
         }}
       />

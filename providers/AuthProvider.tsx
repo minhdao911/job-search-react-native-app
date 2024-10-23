@@ -4,14 +4,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { signOut as FBSignOut } from "firebase/auth";
 import { auth } from "@/lib/firebase/config";
 import { useStorageState } from "@/hooks/useStorageState";
-import { verifyIdToken } from "@/lib/auth";
+import { configureGoogleSignin, verifyIdToken } from "@/lib/auth";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 interface Auth {
   token: string | null;
   user: User | null;
   isLoggedIn: boolean;
   isLoading: boolean;
-  signIn: (token: string) => Promise<void>;
+  signIn: (token: string) => void;
   signUp: (token: string, userData: User) => Promise<void>;
   signOut: () => Promise<void>;
 }
@@ -21,7 +22,7 @@ const AuthContext = React.createContext<Auth>({
   user: null,
   isLoggedIn: false,
   isLoading: false,
-  signIn: async () => {},
+  signIn: () => {},
   signUp: async () => {},
   signOut: async () => {},
 });
@@ -44,7 +45,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     })();
   }, [token]);
 
-  const signIn = async (token: string) => {
+  const signIn = (token: string) => {
     setToken(token);
   };
 
@@ -55,6 +56,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signOut = async () => {
     await FBSignOut(auth);
+
+    configureGoogleSignin();
+    const isGoogleSignedIn = await GoogleSignin.hasPreviousSignIn();
+    if (isGoogleSignedIn) {
+      // Sign out from Google session
+      await GoogleSignin.signOut();
+    }
+
     setToken("");
     setUser(null);
   };

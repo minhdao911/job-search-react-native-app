@@ -4,6 +4,7 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
+    "start-dev": "expo start --dev-client",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
@@ -11,6 +12,7 @@
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.0.2",
     "@react-native-async-storage/async-storage": "^1.24.0",
+    "@react-native-google-signin/google-signin": "^13.1.0",
     "@tanstack/react-query": "^4.36.1",
     "@types/lodash": "^4.17.10",
     "@types/react": "~18.2.79",
@@ -40,7 +42,8 @@
     "react-native-screens": "3.31.1",
     "react-native-web": "~0.19.6",
     "typescript": "~5.3.3",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "expo-dev-client": "~4.0.28"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

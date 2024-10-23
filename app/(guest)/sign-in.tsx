@@ -1,6 +1,11 @@
-import { Button, ControlledInput, ScreenContainer } from "@/components";
+import {
+  Button,
+  ControlledInput,
+  GoogleSigninButton,
+  ScreenContainer,
+} from "@/components";
 import Checkbox from "@/components/common/checkbox/Checkbox";
-import { COLORS, FONT, icons, SIZES } from "@/constants";
+import { COLORS, FONT, SIZES } from "@/constants";
 import { logInWithEmailAndPassword, persistAuthState } from "@/lib/auth";
 import { useAuth } from "@/providers/AuthProvider";
 import { emailRegex } from "@/utils";
@@ -95,12 +100,7 @@ const SignIn = () => {
               isLoading={isLoading}
               onPress={methods.handleSubmit(onSubmit)}
             />
-            <Button
-              variant="secondary"
-              text="Sign in with Google"
-              image={icons.google}
-              layout={["image", "text"]}
-            />
+            <GoogleSigninButton label="Sign in with Google" />
           </View>
         </View>
         <View style={styles.footerContainer}>

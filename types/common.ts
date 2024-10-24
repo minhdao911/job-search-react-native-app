@@ -8,3 +8,8 @@ export enum JobCategory {
   SalesAndMarketing = "Sales and Marketing",
   Others = "Others",
 }
+
+export enum SearchType {
+  Company = "company",
+  Recent = "recent",
+}

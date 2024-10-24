@@ -20,7 +20,7 @@ const useSearch = (endpoint: Endpoint) => {
         const parsedData = JobSearchResponseSchema.parse(response.data);
         return parsedData.data;
       }
-      case Endpoint.SeachFilters: {
+      case Endpoint.SearchFilters: {
         const parsedData = JobSearchFiltersResponseSchema.parse(response.data);
         return parsedData.data;
       }

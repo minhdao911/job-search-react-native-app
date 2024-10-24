@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export enum Endpoint {
   Search = "search",
-  SeachFilters = "search-filters",
+  SearchFilters = "search-filters",
   Details = "job-details",
 }
 
@@ -43,7 +43,7 @@ const CommonJobSearchQuerySchema = z.object({
   job_requirements: z.string().optional(),
   job_titles: z.string().optional(), // id from search filter
   company_types: z.string().optional(), // id from search filter
-  employers: z.string().optional(), // id from search filter
+  employer: z.string().optional(), // id from search filter
   radius: z.number().optional(), // in km
   actively_hiring: z.string().optional(),
 });
@@ -132,6 +132,7 @@ const JobFilterPropsSchema = z.object({
   value: z.string(),
   est_count: z.number(),
 });
+export type JobFilterProps = z.infer<typeof JobFilterPropsSchema>;
 
 const JobSearchResponseDataSchema = z.object({
   job_id: z.string(),

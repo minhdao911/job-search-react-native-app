@@ -2,15 +2,15 @@ import React, { useCallback, useState } from "react";
 import { Alert, RefreshControl, ScrollView, View } from "react-native";
 import { Stack } from "expo-router";
 import {
-  NearbyJobs,
-  PopularJobs,
+  RecentJobs,
+  TopCompany,
   ScreenContainer,
   Button,
   Welcome,
 } from "@/components";
+import { useAuth } from "@/providers/AuthProvider";
 
 import styles from "@/styles/common";
-import { useAuth } from "@/providers/AuthProvider";
 
 const Home = () => {
   const { signOut } = useAuth();
@@ -53,8 +53,8 @@ const Home = () => {
       >
         <View style={styles.screenContainer}>
           <Welcome />
-          <PopularJobs refreshing={refreshing} />
-          <NearbyJobs refreshing={refreshing} />
+          <TopCompany refreshing={refreshing} />
+          <RecentJobs refreshing={refreshing} />
         </View>
       </ScrollView>
     </ScreenContainer>

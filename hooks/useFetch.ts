@@ -1,3 +1,5 @@
+import axios from "axios";
+import dayjs from "dayjs";
 import {
   Endpoint,
   JobDetailsResponseSchema,
@@ -13,7 +15,7 @@ import mockDetails from "@/data/mock-details";
 import { mockData } from "@/utils/mock-helpers";
 
 const useFetch = (endpoint: Endpoint, query: JobQuery) => {
-  const options = getOptions(endpoint, query);
+  // const options = getOptions(endpoint, query);
 
   const fetchData = async () => {
     // const response = await axios.request(options);
@@ -21,9 +23,13 @@ const useFetch = (endpoint: Endpoint, query: JobQuery) => {
       case Endpoint.Search: {
         const response = (await mockData(mockSearch)) as any;
         const parsedData = JobSearchResponseSchema.parse(response.data);
-        return parsedData.data;
+        return parsedData.data.filter((item) =>
+          item.job_offer_expiration_datetime_utc
+            ? dayjs().diff(dayjs(item.job_offer_expiration_datetime_utc)) < 0
+            : true
+        );
       }
-      case Endpoint.SeachFilters: {
+      case Endpoint.SearchFilters: {
         const response = (await mockData(mockFilters)) as any;
         const parsedData = JobSearchFiltersResponseSchema.parse(response.data);
         return parsedData.data;

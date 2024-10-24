@@ -4,7 +4,9 @@ import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import {
+  DatePosted,
   Endpoint,
+  JobQuery,
   JobSearchQuery,
   JobSearchResponseData,
 } from "@/types/jsearch";
@@ -12,13 +14,16 @@ import useSearch from "@/hooks/useSearch";
 import { uniqBy } from "lodash";
 import FilterSheet from "@/components/search/filter-sheet/FilterSheet";
 import BottomSheet from "@gorhom/bottom-sheet";
+import { useAuth } from "@/providers/AuthProvider";
+import { SearchType } from "@/types/common";
 
 import commonStyles from "@/styles/common";
 import styles from "@/styles/search";
 
 const Search = () => {
-  const { term } = useLocalSearchParams();
   const router = useRouter();
+  const { term } = useLocalSearchParams();
+  const { user } = useAuth();
   const { data, isLoading, isSuccess, error, mutate } = useSearch(
     Endpoint.Search
   );
@@ -26,13 +31,33 @@ const Search = () => {
 
   const [page, setPage] = useState(1);
   const [jobData, setJobData] = useState<JobSearchResponseData[]>([]);
+  const [displayedSearchTerm, setDisplayedSearchTerm] = useState<string>(
+    term as string
+  );
   const [searchTerm, setSearchTerm] = useState<string>(term as string);
 
   useEffect(() => {
-    mutate({
+    const queryObj: JobQuery = {
       query: term as string,
       page,
-    });
+    };
+    if (term.includes("type")) {
+      queryObj.query = `${user!.preferences} in ${user!.location}`;
+
+      const params = new URLSearchParams(term as string);
+      const type = params.get("type");
+
+      if (type === SearchType.Company) {
+        const name = params.get("name")!;
+        const id = params.get("id")!;
+        queryObj.employer = id;
+        setDisplayedSearchTerm(name);
+      } else if (type === SearchType.Recent) {
+        queryObj.date_posted = DatePosted.Week;
+        setDisplayedSearchTerm("Recent jobs");
+      }
+    }
+    mutate(queryObj);
   }, []);
 
   useEffect(() => {
@@ -59,8 +84,10 @@ const Search = () => {
   };
 
   const handleFetchMore = () => {
-    mutate({ query: searchTerm, page: page + 1 });
-    setPage(page + 1);
+    if (jobData.length > 7) {
+      mutate({ query: searchTerm, page: page + 1 });
+      setPage(page + 1);
+    }
   };
 
   return (
@@ -78,7 +105,7 @@ const Search = () => {
       />
       <View style={commonStyles.screenContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.searchTitle}>{term}</Text>
+          <Text style={styles.searchTitle}>{displayedSearchTerm}</Text>
           <Button
             variant="icon"
             style={styles.filterBtn}
@@ -121,7 +148,11 @@ const Search = () => {
           )}
         </View>
       </View>
-      <FilterSheet ref={sheetRef} onSubmit={handleApplyFilter} />
+      <FilterSheet
+        ref={sheetRef}
+        location={user!.location}
+        onSubmit={handleApplyFilter}
+      />
     </ScreenContainer>
   );
 };

@@ -5,6 +5,10 @@ import {
   JobRequirement,
   JobSearchResponseData,
 } from "@/types/jsearch";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 export const getEmploymentTypeText = (type: EmploymentType) => {
   switch (type) {
@@ -82,4 +86,17 @@ export const getJobTitles = (type: JobCategory) => {
     default:
       return [];
   }
+};
+
+export const getJobPostedTime = (date: string) => {
+  let result = dayjs(date).fromNow();
+  result = result.replace("ago", "");
+  result = result.replace(/(seconds|second)/, "s");
+  result = result.replace(/(minutes|minute)/, "min");
+  result = result.replace(/(hours|hour)/, "h");
+  result = result.replace(/(days|day)/, "d");
+  result = result.replace(/(months|month)/, "m");
+  result = result.replace("a", "1");
+  result = result.replace(/\s/, "");
+  return result;
 };

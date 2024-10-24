@@ -14,8 +14,8 @@ import Location from "./onboarding/location/Location";
 
 // home screen
 import Welcome from "./home/welcome/Welcome";
-import NearbyJobs from "./home/nearby/NearbyJobs";
-import PopularJobs from "./home/popular/PopularJobs";
+import RecentJobs from "./home/recent/RecentJobs";
+import TopCompany from "./home/top-company/TopCompany";
 
 // job details screen
 import Company from "./jobdetails/company/Company";
@@ -41,8 +41,8 @@ export {
   Location,
   // home
   Welcome,
-  NearbyJobs,
-  PopularJobs,
+  RecentJobs,
+  TopCompany,
   // job details
   Company,
   JobTabs,

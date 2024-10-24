@@ -1,26 +1,27 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONT, SHADOWS, SIZES } from "../../../../constants";
+import { COLORS, FONT, SIZES } from "../../../../constants";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
     padding: SIZES.medium,
     borderRadius: SIZES.small,
     backgroundColor: "#FFF",
-    ...SHADOWS.medium,
-    shadowColor: COLORS.white,
+  },
+  leftContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    width: "75%",
   },
   textContainer: {
-    flex: 1,
     marginHorizontal: SIZES.medium,
   },
   jobName: {
     fontSize: SIZES.medium,
-    fontFamily: "DMBold",
+    fontFamily: FONT.bold,
     color: COLORS.primary,
   },
   companyName: {
@@ -29,15 +30,31 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     marginBottom: 1,
   },
+  detailsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    marginTop: 8,
+  },
+  jobType: {
+    fontSize: SIZES.small,
+    fontFamily: FONT.regular,
+    color: COLORS.gray,
+  },
   location: {
     fontSize: SIZES.small,
-    fontFamily: "DMRegular",
+    fontFamily: FONT.regular,
     color: COLORS.gray,
-    marginTop: 5,
   },
-  heartImg: {
-    width: 15,
-    height: 15,
+  rightContainer: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 10,
+  },
+  timeText: {
+    fontSize: SIZES.small,
+    fontFamily: FONT.medium,
+    color: COLORS.gray,
   },
 });
 

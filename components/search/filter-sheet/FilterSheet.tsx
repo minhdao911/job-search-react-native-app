@@ -46,18 +46,19 @@ const timeRanges = Object.values(DatePosted)
   }));
 
 interface FilterSheetProps {
+  location?: string;
   onSubmit: (params: Partial<JobSearchQuery>) => void;
 }
 
 const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
-  ({ onSubmit }, ref) => {
+  ({ location, onSubmit }, ref) => {
     const snapPoints = useMemo(() => ["75%"], []);
 
     const [remoteChecked, setRemoteChecked] = useState(false);
     const [jobTypes, setJobTypes] = useState<EmploymentType[]>([]);
     const [expLevels, setExpLevels] = useState<JobRequirement[]>([]);
     const [datePosted, setDatePosted] = useState<DatePosted>();
-    const [locationInput, setLocationInput] = useState<string>();
+    const [locationInput, setLocationInput] = useState<string>(location ?? "");
     const [locationError, setLocationError] = useState<string>();
     const [isLocationLoading, setIsLocationLoading] = useState(false);
 

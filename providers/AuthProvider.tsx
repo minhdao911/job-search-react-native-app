@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const value = {
     token,
     user,
-    isLoggedIn: !!token,
+    isLoggedIn: !!user,
     isLoading,
     setUser,
     signIn,

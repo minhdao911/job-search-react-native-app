@@ -63,7 +63,8 @@ const JobTitles = ({
   };
 
   return (
-    <View style={styles.container}>
+    <>
+      <Text style={styles.title}>Be more specific about your desired jobs</Text>
       <View style={styles.inputContainer}>
         <Input
           containerStyle={styles.input}
@@ -108,7 +109,7 @@ const JobTitles = ({
         }}
         numColumns={2}
       />
-    </View>
+    </>
   );
 };
 

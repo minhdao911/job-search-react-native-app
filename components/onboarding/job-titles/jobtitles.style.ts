@@ -2,16 +2,21 @@ import { COLORS, FONT, SHADOWS, SIZES } from "@/constants";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 50,
+  title: {
+    fontSize: SIZES.xLarge + 2,
+    color: COLORS.primary,
+    fontFamily: FONT.bold,
+    textAlign: "center",
   },
   inputContainer: {
+    marginTop: 50,
     flexDirection: "row",
     marginBottom: 16,
   },
   input: {
     borderWidth: 1,
     borderColor: COLORS.gray2,
+    width: "auto",
   },
   addBtn: {
     width: 65,

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: SIZES.large - 2,
-    color: COLORS.primary,
+    color: COLORS.secondary,
     fontFamily: FONT.medium,
     marginTop: 14,
     lineHeight: SIZES.xLarge + 2,

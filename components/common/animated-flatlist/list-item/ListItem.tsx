@@ -10,7 +10,7 @@ import Animated, {
 import styles from "./listitem.style";
 
 type ListItemProps = {
-  item: { title: string; component: React.ReactNode };
+  item: { component: React.ReactNode };
   index: number;
   x: SharedValue<number>;
 };
@@ -34,27 +34,8 @@ const ListItem = ({ item, index, x }: ListItemProps) => {
     };
   }, [index, x]);
 
-  const rnTextStyle = useAnimatedStyle(() => {
-    const opacity = interpolate(
-      x.value,
-      [
-        (index - 1) * SCREEN_WIDTH,
-        index * SCREEN_WIDTH,
-        (index + 1) * SCREEN_WIDTH,
-      ],
-      [0, 1, 0],
-      Extrapolation.CLAMP
-    );
-    return {
-      opacity,
-    };
-  }, [index, x]);
-
   return (
     <View style={[styles.itemContainer, { width: SCREEN_WIDTH }]}>
-      <Animated.Text style={[styles.textItem, rnTextStyle]}>
-        {item.title}
-      </Animated.Text>
       <Animated.View style={[styles.viewContainer, rnViewStyle]}>
         {item.component}
       </Animated.View>

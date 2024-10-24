@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   useWindowDimensions,
-  View,
 } from "react-native";
 import { COLORS, icons } from "@/constants";
 import Checkbox from "expo-checkbox";
@@ -82,7 +81,8 @@ const Preferences = ({
   };
 
   return (
-    <View style={styles.container}>
+    <>
+      <Text style={styles.title}>What kind of jobs are you looking for?</Text>
       <FlatList
         contentContainerStyle={styles.listContainer}
         showsVerticalScrollIndicator={false}
@@ -114,7 +114,7 @@ const Preferences = ({
         }}
         numColumns={2}
       />
-    </View>
+    </>
   );
 };
 

@@ -6,12 +6,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: SIZES.xxLarge,
   },
-  textItem: {
-    fontSize: SIZES.xxLarge,
-    color: COLORS.primary,
-    fontFamily: FONT.bold,
-    textAlign: "center",
-  },
   viewContainer: {
     width: "100%",
     height: "100%",

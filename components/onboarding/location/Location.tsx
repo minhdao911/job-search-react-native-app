@@ -95,7 +95,8 @@ const Location = ({
   };
 
   return (
-    <View style={styles.container}>
+    <>
+      <Text style={styles.title}>Where do you want to work?</Text>
       <Image
         style={styles.image}
         source={icons.myLocation}
@@ -118,7 +119,7 @@ const Location = ({
           onPress={handleGetLocation}
         />
       </View>
-    </View>
+    </>
   );
 };
 

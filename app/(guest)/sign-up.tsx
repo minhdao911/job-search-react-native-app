@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: "center",
     justifyContent: "center",
+    gap: 5,
   },
   mainText: {
     fontSize: SIZES.xLarge,
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontSize: SIZES.medium,
-    color: COLORS.primary,
+    color: COLORS.secondary,
     fontFamily: FONT.regular,
   },
   formContainer: {

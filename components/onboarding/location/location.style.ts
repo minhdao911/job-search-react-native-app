@@ -2,10 +2,14 @@ import { COLORS, FONT, SIZES } from "@/constants";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 10,
+  title: {
+    fontSize: SIZES.xLarge + 2,
+    color: COLORS.primary,
+    fontFamily: FONT.bold,
+    textAlign: "center",
   },
   image: {
+    marginTop: 10,
     width: "100%",
     height: 450,
   },

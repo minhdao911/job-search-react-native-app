@@ -2,10 +2,14 @@ import { COLORS, FONT, SHADOWS, SIZES } from "@/constants";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
+  title: {
+    fontSize: SIZES.xLarge + 2,
+    color: COLORS.primary,
+    fontFamily: FONT.bold,
+    textAlign: "center",
   },
   listContainer: {
+    marginTop: 40,
     gap: 20,
     paddingBottom: 80,
   },

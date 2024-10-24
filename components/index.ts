@@ -5,12 +5,13 @@ import SearchResultCard from "./common/cards/search-result/SearchResultCard";
 import { Input, ControlledInput } from "./common/input/Input";
 import Button from "./common/button/Button";
 import GoogleSigninButton from "./common/button/GoogleSigninButton";
+import AnimatedFlatList from "./common/animated-flatlist/AnimatedFlatList";
 
 // onboarding screen
-import ListItem from "./onboarding/list-item/ListItem";
 import ActionButtons from "./onboarding/action-buttons/ActionButtons";
 import JobTitles from "./onboarding/job-titles/JobTitles";
 import Location from "./onboarding/location/Location";
+import Preferences from "./onboarding/preferences/Preferences";
 
 // home screen
 import Welcome from "./home/welcome/Welcome";
@@ -34,11 +35,12 @@ export {
   GoogleSigninButton,
   Input,
   ControlledInput,
+  AnimatedFlatList,
   // onboarding
-  ListItem,
   ActionButtons,
   JobTitles,
   Location,
+  Preferences,
   // home
   Welcome,
   RecentJobs,

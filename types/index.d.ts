@@ -1,6 +1,7 @@
 declare module "*.png";
 
 declare module "@env" {
+  export const ENVIRONMENT: string;
   export const RAPID_API_KEY: string;
   export const FIREBASE_API_KEY: string;
   export const FIREBASE_PROJECT_ID: string;

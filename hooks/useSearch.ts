@@ -9,12 +9,19 @@ import { useMutation } from "@tanstack/react-query";
 import { getOptions } from "@/utils/jsearch";
 import mockSearch from "@/data/mock-search";
 import { mockData } from "@/utils/mock-helpers";
+import { ENVIRONMENT } from "@env";
 
 const useSearch = (endpoint: Endpoint) => {
   const fetchData = async (query: JobQuery) => {
-    // const options = getOptions(endpoint, query);
-    // const response = await axios.request(options);
-    const response = (await mockData(mockSearch)) as any;
+    let response;
+
+    if (ENVIRONMENT !== "development") {
+      const options = getOptions(endpoint, query);
+      response = await axios.request(options);
+    } else {
+      response = (await mockData(mockSearch)) as any;
+    }
+
     switch (endpoint) {
       case Endpoint.Search: {
         const parsedData = JobSearchResponseSchema.parse(response.data);

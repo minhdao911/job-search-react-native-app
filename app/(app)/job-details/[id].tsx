@@ -14,7 +14,7 @@ import { Endpoint, JobDetailsResponseData } from "@/types/jsearch";
 import { getLocationText } from "@/utils";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, Alert, Share, Text, View } from "react-native";
 
 import commonStyles from "@/styles/common";
 
@@ -47,6 +47,16 @@ const JobDetails = () => {
     }
   };
 
+  const share = async () => {
+    try {
+      await Share.share({
+        url: jobData[0].job_apply_link,
+      });
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  };
+
   return (
     <ScreenContainer>
       <Stack.Screen
@@ -59,7 +69,11 @@ const JobDetails = () => {
             />
           ),
           headerRight: () => (
-            <Button variant="icon" icon="share-social-outline" />
+            <Button
+              variant="icon"
+              icon="share-social-outline"
+              onPress={share}
+            />
           ),
         }}
       />

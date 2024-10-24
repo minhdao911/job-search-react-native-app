@@ -3,6 +3,7 @@ import {
   setPersistence,
   signInWithEmailAndPassword,
   browserLocalPersistence,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 import axios from "axios";
@@ -46,6 +47,10 @@ export const verifyIdToken = async (token: string) => {
     console.log(err);
     return null;
   }
+};
+
+export const sendResetEmail = async (email: string) => {
+  await sendPasswordResetEmail(auth, email);
 };
 
 export const configureGoogleSignin = () => {

@@ -12,7 +12,13 @@ import { useRouter } from "expo-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 
 type Inputs = {
   firstName: string;
@@ -24,6 +30,7 @@ type Inputs = {
 
 const SignUp = () => {
   const router = useRouter();
+  const { width: SCREEN_WIDTH } = useWindowDimensions();
   const { signUp } = useAuth();
   const { ...methods } = useForm<Inputs>({
     defaultValues: {
@@ -34,6 +41,8 @@ const SignUp = () => {
       confirmPassword: "",
     },
   });
+
+  const infoInputWidth = SCREEN_WIDTH / 2 - 7 - 30;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -79,11 +88,16 @@ const SignUp = () => {
           <FormProvider {...methods}>
             <View style={styles.infoContainer}>
               <ControlledInput
+                containerStyle={{ width: infoInputWidth }}
                 name="firstName"
                 placeholder="First name *"
                 rules={{ required: "First name is required" }}
               />
-              <ControlledInput name="lastName" placeholder="Last name" />
+              <ControlledInput
+                containerStyle={{ width: infoInputWidth }}
+                name="lastName"
+                placeholder="Last name"
+              />
             </View>
             <ControlledInput
               name="email"
@@ -101,7 +115,13 @@ const SignUp = () => {
               name="password"
               placeholder="Password *"
               secureTextEntry
-              rules={{ required: "Password is required" }}
+              rules={{
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+              }}
             />
             <ControlledInput
               name="confirmPassword"
@@ -170,7 +190,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flexDirection: "row",
-    gap: 15,
+    justifyContent: "space-between",
   },
   btnContainer: {
     marginTop: 25,

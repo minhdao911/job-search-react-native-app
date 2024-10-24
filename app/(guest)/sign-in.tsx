@@ -35,8 +35,8 @@ const SignIn = () => {
   const onSubmit = async ({ email, password }: Inputs) => {
     setIsLoading(true);
     try {
-      const { token } = await logInWithEmailAndPassword(email, password);
-      await signIn(token);
+      const { token, uid } = await logInWithEmailAndPassword(email, password);
+      await signIn(token, uid);
       setIsLoading(false);
       router.replace("/");
     } catch (err) {
@@ -92,7 +92,11 @@ const SignIn = () => {
                 setRememberChecked(value);
               }}
             />
-            <Button variant="ghost" text="Forgot Password" />
+            <Button
+              variant="ghost"
+              text="Forgot Password"
+              onPress={() => router.push("/forgot-password")}
+            />
           </View>
           <View style={styles.btnContainer}>
             <Button

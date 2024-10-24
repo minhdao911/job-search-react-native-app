@@ -41,7 +41,7 @@ const GoogleSigninButton = ({ label }: GoogleSigninButtonProps) => {
         const record = await readUserData(user.uid);
 
         if (record) {
-          signIn(token);
+          await signIn(token, user.uid);
         } else {
           await signUp(token, {
             uid: user.uid,

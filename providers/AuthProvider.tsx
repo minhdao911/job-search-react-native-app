@@ -13,7 +13,7 @@ interface Auth {
   isLoggedIn: boolean;
   isLoading: boolean;
   setUser: (user: User) => void;
-  signIn: (token: string) => void;
+  signIn: (token: string, uid: string) => Promise<void>;
   signUp: (token: string, userData: Partial<User>) => Promise<void>;
   signOut: () => Promise<void>;
 }
@@ -24,7 +24,7 @@ const AuthContext = React.createContext<Auth>({
   isLoggedIn: false,
   isLoading: false,
   setUser: () => {},
-  signIn: () => {},
+  signIn: async () => {},
   signUp: async () => {},
   signOut: async () => {},
 });
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     (async () => {
-      if (token) {
+      if (token && !user) {
         const uid = await verifyIdToken(token);
         if (uid) {
           const user = await readUserData(uid);
@@ -45,19 +45,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       }
     })();
-  }, [token]);
+  }, [token, user]);
 
-  const signIn = (token: string) => {
+  const signIn = async (token: string, uid: string) => {
+    const user = await readUserData(uid);
+    setUser(user);
     setToken(token);
   };
 
   const signUp = async (token: string, userData: Partial<User>) => {
-    await writeUserData({
+    const data = {
       uid: userData.uid!,
       name: userData.name,
       email: userData.email!,
       isOnboarded: false,
-    });
+    };
+    await writeUserData(data);
+    setUser(data);
     setToken(token);
   };
 

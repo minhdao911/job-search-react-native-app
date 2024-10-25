@@ -37,7 +37,8 @@ const AuthContext = React.createContext<Auth>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [[isTokenLoading, token], setToken] = useStorageState("token");
+  const [[isTokenLoading, token], setToken] =
+    useStorageState("careerdash-token");
   const [user, setUser] = useState<LocalUser | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -75,6 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       name: userData.name,
       email: userData.email!,
       isOnboarded: false,
+      created: new Date().toISOString(),
     };
     await writeData(Table.Users, userData.uid!, data);
     setUser({ ...data, favorites: [] });

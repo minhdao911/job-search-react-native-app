@@ -14,6 +14,7 @@ const UserSchema = z.object({
   isOnboarded: z.boolean(),
   preferences: z.string().optional(),
   location: z.string().optional(),
+  created: z.string().datetime(),
 });
 export type User = z.infer<typeof UserSchema>;
 

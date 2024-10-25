@@ -27,6 +27,11 @@ import { default as JobFooter } from "./jobdetails/footer/Footer";
 import Reviews from "./jobdetails/reviews/Reviews";
 import Highlights from "./jobdetails/highlights/Highlights";
 
+// user profile screen
+import ProfileHeader from "./user-profile/profile-header/ProfileHeader";
+import ProfileContent from "./user-profile/profile-content/ProfileContent";
+import ProfileEditForm from "./user-profile/profile-content/ProfileEditForm";
+
 export {
   // common
   Logo,
@@ -54,4 +59,8 @@ export {
   JobFooter,
   Reviews,
   Highlights,
+  // user profile
+  ProfileHeader,
+  ProfileContent,
+  ProfileEditForm,
 };

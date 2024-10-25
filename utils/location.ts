@@ -28,19 +28,23 @@ export const getLocationByLatLon = async (lat: number, lon: number) => {
   }
 };
 
-export const getLocationByText = async (city: string, country: string) => {
+export const getLocationByText = async (data: {
+  city?: string;
+  country: string;
+}) => {
+  const { city, country } = data;
   try {
     const response = await axios.request({
       ...options,
       url: "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward",
       params: {
-        city,
-        country,
+        city: city,
+        country: country,
         "accept-language": "en",
       },
     });
     if (response.data.length > 0) {
-      return city + ", " + country;
+      return city ? city + ", " + country : country;
     }
     return "";
   } catch (error) {

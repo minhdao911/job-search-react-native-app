@@ -2,8 +2,8 @@ import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import { forwardRef, useCallback, useEffect, useMemo, useState } from "react";
-import { Alert, Text, TextInput, View } from "react-native";
+import { forwardRef, useCallback, useMemo, useState } from "react";
+import { Text, View } from "react-native";
 import Button from "@/components/common/button/Button";
 import {
   DatePosted,
@@ -11,8 +11,6 @@ import {
   JobRequirement,
   JobSearchQuery,
 } from "@/types/jsearch";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Dropdown from "@/components/common/dropdown/Dropdown";
 import { COLORS } from "@/constants";
 import {
@@ -20,13 +18,12 @@ import {
   getEmploymentTypeText,
   getJobRequirementText,
 } from "@/utils";
-import * as Location from "expo-location";
-
-import styles from "./filtersheet.style";
-import MultiSelect from "@/components/common/multiselect/MultiSelect";
-import { getLocationByLatLon } from "@/utils/location";
 import Checkbox from "@/components/common/checkbox/Checkbox";
 import { ScrollView } from "react-native-gesture-handler";
+import LocationInput from "@/components/common/input/LocationInput";
+import MultiSelect from "@/components/common/multiselect/MultiSelect";
+
+import styles from "./filtersheet.style";
 
 const employmentTypes = Object.values(EmploymentType).map((value) => ({
   name: getEmploymentTypeText(value),
@@ -59,14 +56,7 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
     const [expLevels, setExpLevels] = useState<JobRequirement[]>([]);
     const [datePosted, setDatePosted] = useState<DatePosted>();
     const [locationInput, setLocationInput] = useState<string>(location ?? "");
-    const [locationError, setLocationError] = useState<string>();
     const [isLocationLoading, setIsLocationLoading] = useState(false);
-
-    useEffect(() => {
-      if (locationError) {
-        Alert.alert("Cannot get location", locationError);
-      }
-    }, [locationError]);
 
     const renderBackdrop = useCallback(
       (props: any) => (
@@ -79,23 +69,6 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
       []
     );
     const closeSheet = () => (ref as any).current?.close();
-
-    const handleGetLocation = async () => {
-      setIsLocationLoading(true);
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setLocationError("Permission to access location was denied");
-        return;
-      }
-
-      const location = await Location.getCurrentPositionAsync({});
-      const data = await getLocationByLatLon(
-        location.coords.latitude,
-        location.coords.longitude
-      );
-      setLocationInput(data);
-      setIsLocationLoading(false);
-    };
 
     const handleReset = () => {
       setJobTypes([]);
@@ -157,28 +130,10 @@ const FilterSheet = forwardRef<BottomSheet, FilterSheetProps>(
             </View>
             <View style={styles.filterItemContainer}>
               <Text style={styles.filterItemTitle}>Location</Text>
-              <View style={styles.inputContainer}>
-                <Ionicons
-                  name="location-outline"
-                  size={18}
-                  color={COLORS.primary}
-                />
-                <TextInput
-                  style={styles.input}
-                  value={locationInput}
-                  placeholder="Anywhere"
-                  onChangeText={setLocationInput}
-                  editable={!isLocationLoading}
-                />
-                <MaterialIcons
-                  style={styles.locationIcon}
-                  name="my-location"
-                  size={18}
-                  color={COLORS.primary}
-                  onPress={handleGetLocation}
-                  disabled={isLocationLoading}
-                />
-              </View>
+              <LocationInput
+                value={locationInput}
+                setInput={setLocationInput}
+              />
             </View>
             <View style={styles.filterItemContainer}>
               <Text style={styles.filterItemTitle}>Experience Level</Text>

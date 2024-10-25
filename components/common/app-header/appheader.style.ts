@@ -1,5 +1,5 @@
 import { COLORS, SIZES } from "@/constants";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: SIZES.large,
+    paddingTop: Platform.OS === "android" ? 35 : 0,
   },
 });
 

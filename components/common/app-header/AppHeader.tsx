@@ -1,6 +1,6 @@
-import { Alert, SafeAreaView, View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import Button from "../button/Button";
-import { useAuth } from "@/providers/AuthProvider";
+import { useRouter } from "expo-router";
 
 import styles from "./appheader.style";
 
@@ -9,24 +9,17 @@ interface AppHeaderProps {
 }
 
 const AppHeader = ({ onMenuPress }: AppHeaderProps) => {
-  const { signOut } = useAuth();
-
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-    } catch (error) {
-      Alert.alert(
-        "Unexpected error while signing out",
-        "Cannot sign out, please try again"
-      );
-    }
-  };
+  const router = useRouter();
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.container}>
         <Button variant="icon" icon="menu" onPress={onMenuPress} />
-        <Button variant="icon" icon="person" onPress={handleSignOut} />
+        <Button
+          variant="icon"
+          icon="person"
+          onPress={() => router.push("/user-profile")}
+        />
       </View>
     </SafeAreaView>
   );

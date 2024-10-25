@@ -18,6 +18,7 @@ import healthcare from "@/assets/icons/healthcare.png";
 import education from "@/assets/icons/education.png";
 import marketing from "@/assets/icons/marketing.png";
 import others from "@/assets/icons/others.png";
+import avatar from "@/assets/icons/avatar.png";
 
 import welcome from "@/assets/images/welcome.png";
 import myLocation from "@/assets/images/my-location.png";
@@ -43,6 +44,7 @@ export default {
   education,
   marketing,
   others,
+  avatar,
   // images
   welcome,
   myLocation,

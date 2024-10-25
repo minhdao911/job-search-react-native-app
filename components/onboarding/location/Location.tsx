@@ -52,14 +52,16 @@ const Location = ({
 
   const validateLocation = async (text: string) => {
     setIsLoading(true);
-    if (!text.includes(",")) {
-      setError("Please make sure city and country is separated by comma");
+    if (!text) {
       setNextDisabled(true);
       setIsLoading(false);
       return;
     }
-    const [city, country] = text.split(",");
-    const location = await getLocationByText(city.trim(), country.trim());
+    const locationParts = text.split(",");
+    const location = await getLocationByText({
+      city: locationParts[1] ? locationParts[0].trim() : undefined,
+      country: locationParts[0].trim(),
+    });
     if (location) {
       setError("");
       setNextDisabled(false);
@@ -105,7 +107,7 @@ const Location = ({
       <View>
         <Input
           containerStyle={styles.input}
-          placeholder="City, Country"
+          placeholder="Country or City, Country"
           value={input}
           onChangeText={handleInputChange}
           editable={!isLoading}

@@ -12,7 +12,7 @@ import { COLORS } from "@/constants";
 import useFetch from "@/hooks/useFetch";
 import { Endpoint, JobDetailsResponseData } from "@/types/jsearch";
 import { checkIfFavorite, getLocationText } from "@/utils";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Share, Text, View } from "react-native";
 import { useAuth } from "@/providers/AuthProvider";
@@ -27,7 +27,6 @@ enum Tab {
 
 const JobDetails = () => {
   const { id } = useLocalSearchParams();
-  const router = useRouter();
   const { user, updateFavorites } = useAuth();
   const { data, isLoading, error } = useFetch(Endpoint.Details, {
     job_id: id as string,
@@ -78,13 +77,6 @@ const JobDetails = () => {
     <ScreenContainer>
       <Stack.Screen
         options={{
-          headerLeft: () => (
-            <Button
-              variant="icon"
-              icon="arrow-back"
-              onPress={() => router.back()}
-            />
-          ),
           headerRight: () => (
             <Button
               variant="icon"

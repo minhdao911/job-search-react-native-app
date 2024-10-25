@@ -1,6 +1,6 @@
 import { Button, ScreenContainer, SearchResultCard } from "@/components";
 import { COLORS, SIZES } from "@/constants";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -104,17 +104,6 @@ const Search = () => {
 
   return (
     <ScreenContainer>
-      <Stack.Screen
-        options={{
-          headerLeft: () => (
-            <Button
-              variant="icon"
-              icon="arrow-back"
-              onPress={() => router.back()}
-            />
-          ),
-        }}
-      />
       <View style={commonStyles.screenContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.title}>{displayedSearchTerm}</Text>

@@ -1,12 +1,14 @@
 import { COLORS } from "@/constants";
-import { Redirect, Stack } from "expo-router";
+import { Redirect, Stack, useRouter } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useAuth } from "@/providers/AuthProvider";
 import { ActivityIndicator, View } from "react-native";
+import { Button } from "@/components";
 
 const queryClient = new QueryClient();
 
 const HomeLayout = () => {
+  const router = useRouter();
   const { isLoggedIn, user, isLoading } = useAuth();
 
   if (isLoading) {
@@ -33,6 +35,13 @@ const HomeLayout = () => {
           headerShadowVisible: false,
           headerBackVisible: false,
           headerTitle: "",
+          headerLeft: () => (
+            <Button
+              variant="icon"
+              icon="arrow-back"
+              onPress={() => router.back()}
+            />
+          ),
         }}
       >
         <Stack.Screen

@@ -13,14 +13,16 @@ import styles from "./searchresultcard.style";
 
 interface SearchResultCardProps {
   item: JobSearchResponseData;
+  hasFavIcon?: boolean;
   isFavorite?: boolean;
   onPress: () => void;
-  onFavPress: () => void;
+  onFavPress?: () => void;
 }
 
 const SearchResultCard = ({
   item,
   isFavorite,
+  hasFavIcon = true,
   onPress,
   onFavPress,
 }: SearchResultCardProps) => {
@@ -40,14 +42,18 @@ const SearchResultCard = ({
         </View>
       </View>
       <View style={styles.rightContainer}>
-        <Button
-          variant="icon"
-          icon={isFavorite ? "heart" : "heart-outline"}
-          iconColor={isFavorite ? COLORS.tertiary : COLORS.gray2}
-          activeOpacity={1}
-          style={{ backgroundColor: "transparent" }}
-          onPress={onFavPress}
-        />
+        {hasFavIcon ? (
+          <Button
+            variant="icon"
+            icon={isFavorite ? "heart" : "heart-outline"}
+            iconColor={isFavorite ? COLORS.tertiary : COLORS.gray2}
+            activeOpacity={1}
+            style={{ backgroundColor: "transparent" }}
+            onPress={onFavPress}
+          />
+        ) : (
+          <View style={{ height: 35 }} />
+        )}
         <Text style={styles.timeText}>
           {getJobPostedTime(item.job_posted_at_datetime_utc)}
         </Text>

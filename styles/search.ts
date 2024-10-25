@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  searchTitle: {
+  title: {
     fontFamily: FONT.bold,
     fontSize: SIZES.xLarge,
     color: COLORS.primary,
@@ -25,9 +25,11 @@ const styles = StyleSheet.create({
     fontSize: SIZES.small,
     color: COLORS.primary,
     marginTop: 2,
-    marginBottom: SIZES.medium,
   },
   loaderContainer: {
+    marginTop: SIZES.medium,
+  },
+  listContainer: {
     marginTop: SIZES.medium,
   },
 });

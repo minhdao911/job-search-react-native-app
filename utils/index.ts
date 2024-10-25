@@ -97,6 +97,7 @@ export const getJobPostedTime = (date: string) => {
   result = result.replace(/(hours|hour)/, "h");
   result = result.replace(/(days|day)/, "d");
   result = result.replace(/(months|month)/, "m");
+  result = result.replace(/(years|year)/, "y");
   result = result.replace("a", "1");
   result = result.replace(/\s/, "");
   return result;

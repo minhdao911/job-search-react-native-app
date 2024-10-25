@@ -117,7 +117,7 @@ const Search = () => {
       />
       <View style={commonStyles.screenContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.searchTitle}>{displayedSearchTerm}</Text>
+          <Text style={styles.title}>{displayedSearchTerm}</Text>
           <Button
             variant="icon"
             style={styles.filterBtn}
@@ -131,37 +131,42 @@ const Search = () => {
         <Text style={styles.noOfSearchedJobs}>
           {jobData.length} Job Opportunities
         </Text>
-        {jobData.length > 0 && (
-          <FlatList
-            data={jobData}
-            renderItem={({ item }) => {
-              const isFavorite = checkIfFavorite(user?.favorites!, item.job_id);
-              return (
-                <SearchResultCard
-                  item={item}
-                  onPress={() => router.push(`/job-details/${item.job_id}`)}
-                  onFavPress={handleFavPress.bind(this, item, isFavorite)}
-                />
-              );
-            }}
-            keyExtractor={(item) => item.job_id}
-            contentContainerStyle={{
-              rowGap: SIZES.medium,
-            }}
-            showsVerticalScrollIndicator={false}
-            onEndReached={handleFetchMore}
-          />
-        )}
-        <View style={styles.loaderContainer}>
-          {isLoading ? (
-            <ActivityIndicator color={COLORS.primary} />
-          ) : error && jobData.length === 0 ? (
-            <Text style={[commonStyles.infoText, { padding: 0 }]}>
-              Something went wrong
-            </Text>
-          ) : (
-            <></>
+        <View style={styles.listContainer}>
+          {jobData.length > 0 && (
+            <FlatList
+              data={jobData}
+              renderItem={({ item }) => {
+                const isFavorite = checkIfFavorite(
+                  user?.favorites!,
+                  item.job_id
+                );
+                return (
+                  <SearchResultCard
+                    item={item}
+                    onPress={() => router.push(`/job-details/${item.job_id}`)}
+                    onFavPress={handleFavPress.bind(this, item, isFavorite)}
+                  />
+                );
+              }}
+              keyExtractor={(item) => item.job_id}
+              contentContainerStyle={{
+                rowGap: SIZES.medium,
+              }}
+              showsVerticalScrollIndicator={false}
+              onEndReached={handleFetchMore}
+            />
           )}
+          <View style={styles.loaderContainer}>
+            {isLoading ? (
+              <ActivityIndicator color={COLORS.primary} />
+            ) : error && jobData.length === 0 ? (
+              <Text style={[commonStyles.infoText, { padding: 0 }]}>
+                Something went wrong
+              </Text>
+            ) : (
+              <></>
+            )}
+          </View>
         </View>
       </View>
       <FilterSheet

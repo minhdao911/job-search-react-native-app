@@ -6,6 +6,7 @@ import { Input, ControlledInput } from "./common/input/Input";
 import Button from "./common/button/Button";
 import GoogleSigninButton from "./common/button/GoogleSigninButton";
 import AnimatedFlatList from "./common/animated-flatlist/AnimatedFlatList";
+import AppHeader from "./common/app-header/AppHeader";
 
 // onboarding screen
 import ActionButtons from "./onboarding/action-buttons/ActionButtons";
@@ -36,6 +37,7 @@ export {
   Input,
   ControlledInput,
   AnimatedFlatList,
+  AppHeader,
   // onboarding
   ActionButtons,
   JobTitles,

@@ -37,11 +37,16 @@ const AuthContext = React.createContext<Auth>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [[isLoading, token], setToken] = useStorageState("token");
+  const [[isTokenLoading, token], setToken] = useStorageState("token");
   const [user, setUser] = useState<LocalUser | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
+
+      if (isTokenLoading) return;
+
       if (token && !user) {
         const uid = await verifyIdToken(token);
         if (uid) {
@@ -52,8 +57,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           setToken("");
         }
       }
+
+      setIsLoading(false);
     })();
-  }, [token, user]);
+  }, [isTokenLoading, token, user]);
 
   const signIn = async (token: string, uid: string) => {
     const user = await readData(Table.Users, uid);

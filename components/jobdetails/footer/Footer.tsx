@@ -7,17 +7,20 @@ import styles from "./footer.style";
 
 interface FooterProps {
   url: string;
+  isFavorite?: boolean;
+  onFavPress: () => void;
 }
 
-const Footer = ({ url }: FooterProps) => {
+const Footer = ({ url, isFavorite, onFavPress }: FooterProps) => {
   return (
     <View style={styles.container}>
       <Button
         variant="outline"
-        icon="heart-outline"
+        icon={isFavorite ? "heart" : "heart-outline"}
         iconSize={25}
         iconColor={COLORS.tertiary}
         style={styles.likeBtn}
+        onPress={onFavPress}
       />
       <Button
         text="Apply for job"

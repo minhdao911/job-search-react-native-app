@@ -13,10 +13,17 @@ import styles from "./searchresultcard.style";
 
 interface SearchResultCardProps {
   item: JobSearchResponseData;
+  isFavorite?: boolean;
   onPress: () => void;
+  onFavPress: () => void;
 }
 
-const SearchResultCard = ({ item, onPress }: SearchResultCardProps) => {
+const SearchResultCard = ({
+  item,
+  isFavorite,
+  onPress,
+  onFavPress,
+}: SearchResultCardProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.leftContainer}>
@@ -35,10 +42,11 @@ const SearchResultCard = ({ item, onPress }: SearchResultCardProps) => {
       <View style={styles.rightContainer}>
         <Button
           variant="icon"
-          icon="heart-outline"
-          iconColor={COLORS.gray2}
+          icon={isFavorite ? "heart" : "heart-outline"}
+          iconColor={isFavorite ? COLORS.tertiary : COLORS.gray2}
           activeOpacity={1}
           style={{ backgroundColor: "transparent" }}
+          onPress={onFavPress}
         />
         <Text style={styles.timeText}>
           {getJobPostedTime(item.job_posted_at_datetime_utc)}

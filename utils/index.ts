@@ -1,3 +1,4 @@
+import { Favorites } from "@/lib/db/schema";
 import { JobCategory } from "@/types/common";
 import {
   DatePosted,
@@ -99,4 +100,8 @@ export const getJobPostedTime = (date: string) => {
   result = result.replace("a", "1");
   result = result.replace(/\s/, "");
   return result;
+};
+
+export const checkIfFavorite = (favorites: Favorites, jobId: string) => {
+  return !!favorites.find((item) => item.job_id === jobId);
 };

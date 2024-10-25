@@ -134,7 +134,7 @@ const JobFilterPropsSchema = z.object({
 });
 export type JobFilterProps = z.infer<typeof JobFilterPropsSchema>;
 
-const JobSearchResponseDataSchema = z.object({
+export const JobSearchResponseDataSchema = z.object({
   job_id: z.string(),
   employer_name: z.string(),
   employer_logo: z.string().nullish(),
@@ -185,7 +185,7 @@ export type JobSearchFiltersResponseData = z.infer<
   typeof JobSearchFiltersResponseDataSchema
 >;
 
-const JobDetailsResponseDataSchema = JobSearchResponseDataSchema.extend({
+export const JobDetailsResponseDataSchema = JobSearchResponseDataSchema.extend({
   estimated_salaries: z.array(JobEstimatedSalarySchema),
   apply_options: z.array(JobApplyOptionSchema),
   employer_reviews: z.array(JobEmployerReviewSchema),

@@ -16,6 +16,7 @@ import FilterSheet from "@/components/search/filter-sheet/FilterSheet";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useAuth } from "@/providers/AuthProvider";
 import { SearchType } from "@/types/common";
+import { checkIfFavorite } from "@/utils";
 
 import commonStyles from "@/styles/common";
 import styles from "@/styles/search";
@@ -23,7 +24,7 @@ import styles from "@/styles/search";
 const Search = () => {
   const router = useRouter();
   const { term } = useLocalSearchParams();
-  const { user } = useAuth();
+  const { user, updateFavorites } = useAuth();
   const { data, isLoading, isSuccess, error, mutate } = useSearch(
     Endpoint.Search
   );
@@ -90,6 +91,17 @@ const Search = () => {
     }
   };
 
+  const handleFavPress = async (
+    data: JobSearchResponseData,
+    isFavorite: boolean
+  ) => {
+    try {
+      await updateFavorites(data, isFavorite);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ScreenContainer>
       <Stack.Screen
@@ -122,12 +134,16 @@ const Search = () => {
         {jobData.length > 0 && (
           <FlatList
             data={jobData}
-            renderItem={({ item }) => (
-              <SearchResultCard
-                item={item}
-                onPress={() => router.push(`/job-details/${item.job_id}`)}
-              />
-            )}
+            renderItem={({ item }) => {
+              const isFavorite = checkIfFavorite(user?.favorites!, item.job_id);
+              return (
+                <SearchResultCard
+                  item={item}
+                  onPress={() => router.push(`/job-details/${item.job_id}`)}
+                  onFavPress={handleFavPress.bind(this, item, isFavorite)}
+                />
+              );
+            }}
             keyExtractor={(item) => item.job_id}
             contentContainerStyle={{
               rowGap: SIZES.medium,

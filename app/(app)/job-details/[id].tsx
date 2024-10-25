@@ -11,10 +11,11 @@ import Footer from "@/components/jobdetails/footer/Footer";
 import { COLORS } from "@/constants";
 import useFetch from "@/hooks/useFetch";
 import { Endpoint, JobDetailsResponseData } from "@/types/jsearch";
-import { getLocationText } from "@/utils";
+import { checkIfFavorite, getLocationText } from "@/utils";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, Share, Text, View } from "react-native";
+import { useAuth } from "@/providers/AuthProvider";
 
 import commonStyles from "@/styles/common";
 
@@ -27,12 +28,20 @@ enum Tab {
 const JobDetails = () => {
   const { id } = useLocalSearchParams();
   const router = useRouter();
+  const { user, updateFavorites } = useAuth();
   const { data, isLoading, error } = useFetch(Endpoint.Details, {
     job_id: id as string,
   });
   const jobData = data as JobDetailsResponseData[];
 
   const [activeTab, setActiveTab] = useState<Tab>(Tab.Description);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    if (jobData?.[0]) {
+      setIsFavorite(checkIfFavorite(user?.favorites!, jobData[0].job_id));
+    }
+  }, [jobData, user?.favorites]);
 
   const displayTabContent = (data: JobDetailsResponseData) => {
     switch (activeTab) {
@@ -54,6 +63,14 @@ const JobDetails = () => {
       });
     } catch (error: any) {
       Alert.alert(error.message);
+    }
+  };
+
+  const handleFavPress = async () => {
+    try {
+      await updateFavorites(jobData[0], isFavorite);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -98,7 +115,11 @@ const JobDetails = () => {
               setActiveTab={setActiveTab}
             />
             {displayTabContent(jobData[0])}
-            <Footer url={jobData[0].job_apply_link} />
+            <Footer
+              url={jobData[0].job_apply_link}
+              isFavorite={isFavorite}
+              onFavPress={handleFavPress}
+            />
           </View>
         )}
       </>

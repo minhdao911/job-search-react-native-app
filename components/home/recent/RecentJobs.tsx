@@ -8,6 +8,7 @@ import Button from "@/components/common/button/Button";
 import SearchResultCard from "@/components/common/cards/search-result/SearchResultCard";
 import { useAuth } from "@/providers/AuthProvider";
 import { SearchType } from "@/types/common";
+import { checkIfFavorite } from "@/utils";
 
 import commonStyles from "@/styles/common";
 import styles from "./recentjobs.style";
@@ -18,7 +19,7 @@ interface NearbyJobsProps {
 
 const NearbyJobs = ({ refreshing }: NearbyJobsProps) => {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, updateFavorites } = useAuth();
 
   const { data, isLoading, error, refetch } = useFetch(Endpoint.Search, {
     query: `${user?.preferences} in ${user?.location}`,
@@ -32,6 +33,17 @@ const NearbyJobs = ({ refreshing }: NearbyJobsProps) => {
       refetch();
     }
   }, [refreshing]);
+
+  const handleFavPress = async (
+    data: JobSearchResponseData,
+    isFavorite: boolean
+  ) => {
+    try {
+      await updateFavorites(data, isFavorite);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -49,13 +61,18 @@ const NearbyJobs = ({ refreshing }: NearbyJobsProps) => {
         ) : error ? (
           <Text style={commonStyles.infoText}>Something went wrong</Text>
         ) : (
-          jobData.map((item) => (
-            <SearchResultCard
-              key={`nearby-job-${item.job_id}`}
-              item={item}
-              onPress={() => router.push(`/job-details/${item.job_id}`)}
-            />
-          ))
+          jobData.map((item) => {
+            const isFavorite = checkIfFavorite(user?.favorites!, item.job_id);
+            return (
+              <SearchResultCard
+                key={`nearby-job-${item.job_id}`}
+                item={item}
+                isFavorite={isFavorite}
+                onPress={() => router.push(`/job-details/${item.job_id}`)}
+                onFavPress={handleFavPress.bind(this, item, isFavorite)}
+              />
+            );
+          })
         )}
       </View>
     </View>

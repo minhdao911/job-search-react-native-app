@@ -7,8 +7,8 @@ import {
   ScreenContainer,
 } from "@/components";
 import { Page } from "@/components/common/animated-flatlist/AnimatedFlatList";
-import { writeUserData } from "@/lib/db";
-import { User } from "@/lib/db/schema";
+import { writeData } from "@/lib/db";
+import { Table, User } from "@/lib/db/schema";
 import { useAuth } from "@/providers/AuthProvider";
 import { JobCategory } from "@/types/common";
 import { getJobTitles } from "@/utils";
@@ -72,8 +72,8 @@ const Onboarding = () => {
       location: jobLocation,
       isOnboarded: true,
     } as User;
-    await writeUserData(updatedData);
-    setUser(updatedData);
+    await writeData(Table.Users, user!.uid, updatedData);
+    setUser({ ...updatedData, favorites: [] });
     router.replace("/");
   };
 

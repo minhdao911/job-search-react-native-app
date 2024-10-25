@@ -1,5 +1,10 @@
-import { JobDetailsResponseSchema } from "@/types/jsearch";
+import { JobSearchResponseDataSchema } from "@/types/jsearch";
 import { z } from "zod";
+
+export enum Table {
+  Users = "users",
+  Favorites = "favorites",
+}
 
 const UserSchema = z.object({
   name: z.string().nullish(),
@@ -12,5 +17,10 @@ const UserSchema = z.object({
 });
 export type User = z.infer<typeof UserSchema>;
 
-const FavoritesSchema = z.array(JobDetailsResponseSchema);
+const FavoritesSchema = z.array(JobSearchResponseDataSchema);
 export type Favorites = z.infer<typeof FavoritesSchema>;
+
+const LocalUserSchema = UserSchema.extend({
+  favorites: FavoritesSchema,
+});
+export type LocalUser = z.infer<typeof LocalUserSchema>;

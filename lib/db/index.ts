@@ -1,16 +1,14 @@
 import { child, get, ref, set } from "firebase/database";
 import { db } from "../firebase/config";
-import { User } from "./schema";
+import { Table } from "./schema";
 
-export const writeUserData = async (data: User) => {
-  await set(ref(db, "users/" + data.uid), {
-    ...data,
-  });
+export const writeData = async (table: Table, uid: string, data: any) => {
+  await set(ref(db, table + "/" + uid), data);
 };
 
-export const readUserData = async (uid: string) => {
+export const readData = async (table: Table, uid: string) => {
   const dbRef = ref(db);
-  const snapshot = await get(child(dbRef, `users/${uid}`));
+  const snapshot = await get(child(dbRef, `${table}/${uid}`));
   if (snapshot.exists()) {
     return snapshot.val();
   }

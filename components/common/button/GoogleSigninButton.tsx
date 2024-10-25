@@ -5,13 +5,14 @@ import {
   isSuccessResponse,
 } from "@react-native-google-signin/google-signin";
 import { useEffect, useState } from "react";
-import { readUserData } from "@/lib/db";
+import { readData } from "@/lib/db";
 import { useAuth } from "@/providers/AuthProvider";
 import { useRouter } from "expo-router";
 import { Alert } from "react-native";
 import { auth } from "@/lib/firebase/config";
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { configureGoogleSignin } from "@/lib/auth";
+import { Table } from "@/lib/db/schema";
 
 interface GoogleSigninButtonProps {
   label: string;
@@ -38,7 +39,7 @@ const GoogleSigninButton = ({ label }: GoogleSigninButtonProps) => {
         const googleCredential = GoogleAuthProvider.credential(idToken);
         const { user } = await signInWithCredential(auth, googleCredential);
         const token = await user.getIdToken();
-        const record = await readUserData(user.uid);
+        const record = await readData(Table.Users, user.uid);
 
         if (record) {
           await signIn(token, user.uid);

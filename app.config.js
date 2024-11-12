@@ -1,4 +1,7 @@
 export default {
+  name: "Career Dash",
+  slug: "job-search-app",
+  version: "1.0.0",
   expo: {
     scheme: "acme",
     web: {
@@ -10,20 +13,18 @@ export default {
         "expo-location",
         {
           locationAlwaysAndWhenInUsePermission:
-            "Allow CareerDash to use your location.",
+            "Allow Career Dash to use your location.",
         },
       ],
       [
         "expo-secure-store",
         {
           faceIDPermission:
-            "Allow CareerDash to access your Face ID biometric data.",
+            "Allow Career Dash to access your Face ID biometric data.",
         },
       ],
       "@react-native-google-signin/google-signin",
     ],
-    name: "job-search-app",
-    slug: "job-search-app",
     extra: {
       eas: {
         projectId: "59857ccc-2ce1-4041-b582-a533f5301cf5",

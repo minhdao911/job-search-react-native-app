@@ -27,8 +27,6 @@ const useFetch = (endpoint: Endpoint, query: JobQuery) => {
 
     switch (endpoint) {
       case Endpoint.Search: {
-        if (ENVIRONMENT === "development") {
-        }
         response = response ?? ((await mockData(mockSearch)) as any);
         const parsedData = JobSearchResponseSchema.parse(response.data);
         return parsedData.data.filter((item) =>

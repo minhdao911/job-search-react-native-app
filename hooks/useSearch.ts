@@ -15,11 +15,11 @@ const useSearch = (endpoint: Endpoint) => {
   const fetchData = async (query: JobQuery) => {
     let response;
 
-    if (ENVIRONMENT !== "development") {
+    if (ENVIRONMENT === "development") {
+      response = (await mockData(mockSearch)) as any;
+    } else {
       const options = getOptions(endpoint, query);
       response = await axios.request(options);
-    } else {
-      response = (await mockData(mockSearch)) as any;
     }
 
     switch (endpoint) {

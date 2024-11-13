@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     marginTop: SIZES.medium,
+    paddingBottom: 50,
   },
 });
 

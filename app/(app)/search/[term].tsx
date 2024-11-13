@@ -132,6 +132,7 @@ const Search = () => {
                 return (
                   <SearchResultCard
                     item={item}
+                    isFavorite={isFavorite}
                     onPress={() => router.push(`/job-details/${item.job_id}`)}
                     onFavPress={handleFavPress.bind(this, item, isFavorite)}
                   />

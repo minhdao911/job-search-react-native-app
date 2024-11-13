@@ -4,13 +4,13 @@ import LocationInput from "@/components/common/input/LocationInput";
 import { Input } from "@/components/common/input/Input";
 import Button from "@/components/common/button/Button";
 import Feather from "@expo/vector-icons/Feather";
-
-import styles from "./profilecontent.style";
 import { getLocationByText } from "@/utils/location";
 import { useAuth } from "@/providers/AuthProvider";
 import { Table, User } from "@/lib/db/schema";
 import { writeData } from "@/lib/db";
 import { COLORS } from "@/constants";
+
+import styles from "./profilecontent.style";
 
 interface ProfileEditFormProps {
   onSavePress: () => void;
@@ -52,7 +52,7 @@ const ProfileEditForm = ({ onSavePress }: ProfileEditFormProps) => {
     const locationParts = text.split(",");
     const location = await getLocationByText({
       city: locationParts[1] ? locationParts[0].trim() : undefined,
-      country: locationParts[0].trim(),
+      country: locationParts[1].trim(),
     });
     if (!location) {
       setLocationError("Location not found");
@@ -73,7 +73,6 @@ const ProfileEditForm = ({ onSavePress }: ProfileEditFormProps) => {
       ...user,
       preferences: jobTitles.join(","),
       location,
-      favorites: undefined,
     } as User;
     await writeData(Table.Users, user!.uid, updatedData);
     setUser({ ...updatedData, favorites: user!.favorites });

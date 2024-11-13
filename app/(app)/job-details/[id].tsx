@@ -65,9 +65,10 @@ const JobDetails = () => {
     }
   };
 
-  const handleFavPress = async () => {
+  const handleFavPress = async (isFav: boolean) => {
     try {
-      await updateFavorites(jobData[0], isFavorite);
+      setIsFavorite(!isFav);
+      await updateFavorites(jobData[0], isFav);
     } catch (error) {
       console.log(error);
     }
@@ -110,7 +111,7 @@ const JobDetails = () => {
             <Footer
               url={jobData[0].job_apply_link}
               isFavorite={isFavorite}
-              onFavPress={handleFavPress}
+              onFavPress={handleFavPress.bind(this, isFavorite)}
             />
           </View>
         )}

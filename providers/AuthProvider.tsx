@@ -101,12 +101,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     data: JobSearchResponseData,
     isFavorite: boolean
   ) => {
-    let updatedData: JobSearchResponseData[] = [];
+    let updatedData: JobSearchResponseData[] = user?.favorites!;
     if (isFavorite) {
-      updatedData = remove(
-        user?.favorites!,
-        (item) => item.job_id === data.job_id
-      );
+      remove(updatedData, (item) => item.job_id === data.job_id);
     } else {
       updatedData = concat(user?.favorites!, data);
     }
